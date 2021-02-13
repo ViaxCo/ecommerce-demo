@@ -34,6 +34,7 @@ const Header = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <Flex
+      as="header"
       direction="column"
       height={["120px", "fit-content"]}
       px={[3, null]}

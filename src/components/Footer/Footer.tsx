@@ -5,6 +5,7 @@ import ContactDetails from "../ContactDetails";
 const Footer = () => {
   return (
     <Flex
+      as="footer"
       //   @ts-ignore
       display={{ base: "none", smallTablet: "flex" }}
       bg="appBlue.800"

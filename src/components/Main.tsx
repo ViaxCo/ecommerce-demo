@@ -38,6 +38,7 @@ const Main = () => {
 
   return (
     <Box
+      as="main"
       boxShadow="base"
       mx={[0, 4]}
       h="100%"
