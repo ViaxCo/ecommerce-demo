@@ -116,9 +116,7 @@ const Header = () => {
               >
                 <Badge badgeContent={cartItemCount} color="secondary">
                   <ShoppingCart
-                    // @ts-ignore
                     height={{ base: 25, smallTablet: 27, sm: 30 }}
-                    // @ts-ignore
                     width={{ base: 25, smallTablet: 27, sm: 30 }}
                     color="gray.400"
                     cursor="pointer"

@@ -23,7 +23,6 @@ const Cart = () => {
     <Container>
       <Flex w="90%" mx="auto" direction="column" p={3}>
         <Flex
-          // @ts-ignore
           display={{ base: "none", bigTablet: "flex" }}
           fontWeight="bold"
           fontSize="lg"
@@ -42,7 +41,7 @@ const Cart = () => {
             Sub-total
           </Text>
         </Flex>
-        <Box // @ts-ignore
+        <Box
           display={{ base: "block", bigTablet: "none" }}
           fontWeight="bold"
           fontSize="lg"

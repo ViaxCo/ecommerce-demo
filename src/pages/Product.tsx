@@ -49,7 +49,6 @@ const Product = () => {
         </Breadcrumb>
         <Box maxW="640px">
           <Stack
-            //@ts-ignore
             direction={{ base: "column", smallTablet: "row" }}
             spacing={4}
             mb={8}

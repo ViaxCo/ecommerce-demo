@@ -50,7 +50,6 @@ const CartItemMobile = ({ product }: Props) => {
 
   return (
     <Flex
-      // @ts-ignore
       display={{ base: "flex", bigTablet: "none" }}
       direction="column"
       boxShadow="base"

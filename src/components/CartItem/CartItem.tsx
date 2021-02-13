@@ -29,7 +29,6 @@ const CartItem = ({ product }: Props) => {
 
   return (
     <Flex
-      // @ts-ignore
       display={{ base: "none", bigTablet: "flex" }}
       boxShadow="base"
       mb={4}

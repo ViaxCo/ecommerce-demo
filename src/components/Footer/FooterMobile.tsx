@@ -17,7 +17,6 @@ const FooterMobile = () => {
   return (
     <Flex
       as="footer"
-      //   @ts-ignore
       display={{ base: "flex", smallTablet: "none" }}
       bg="appBlue.800"
       color="white"

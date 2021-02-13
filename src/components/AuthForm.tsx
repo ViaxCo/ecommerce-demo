@@ -74,7 +74,6 @@ const AuthForm = ({ authType }: Props) => {
           pb={12}
           boxShadow="lg"
           m="auto"
-          //   @ts-ignore
           mt={{ base: "130px", smallTablet: "152px" }}
         >
           <VStack spacing={8}>
@@ -196,7 +195,6 @@ const AuthForm = ({ authType }: Props) => {
                 <Box
                   visibility="hidden"
                   flex={1}
-                  //   @ts-ignore
                   d={{ base: "none", mobileM: "block" }}
                 />
               </Button>
