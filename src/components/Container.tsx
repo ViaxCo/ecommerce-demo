@@ -4,14 +4,24 @@ import Sidebar from "./Sidebar/Sidebar";
 import Footer from "./Footer/Footer";
 import FooterMobile from "./Footer/FooterMobile";
 import { ReactNode } from "react";
+import { useLocation } from "react-router-dom";
 
 type Props = {
   children: ReactNode;
 };
 
 const Container = ({ children }: Props) => {
+  const location = useLocation();
   return (
-    <Flex direction="column" minH="100vh">
+    <Flex
+      display={
+        location.pathname === "/login" || location.pathname === "/register"
+          ? "none"
+          : "flex"
+      }
+      direction="column"
+      minH="100vh"
+    >
       <Header />
       <Flex flex={1} minH="100%" mt={["120px", "72px"]}>
         <Box

@@ -1,11 +1,11 @@
 import Main from "../components/Main";
-import Container from "../components/Container";
+import Products from "../components/Products";
 
 const Home = () => {
   return (
-    <Container>
-      <Main />
-    </Container>
+    <Main>
+      <Products />
+    </Main>
   );
 };
 

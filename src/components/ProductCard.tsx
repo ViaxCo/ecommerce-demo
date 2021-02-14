@@ -15,6 +15,9 @@ import { BsHeart as HeartIcon } from "react-icons/bs";
 import { Link as RouterLink } from "react-router-dom";
 import { ShoppingCart } from "../components/Header";
 import { GlobalContext, ProductType } from "../context/GlobalState";
+import "lazysizes";
+// import a plugin
+import "lazysizes/plugins/parent-fit/ls.parent-fit";
 
 type Props = {
   product: ProductType;
@@ -45,7 +48,8 @@ const ProductCard = ({ product }: Props) => {
     >
       <Image
         m="auto"
-        src={product.imageUrl}
+        data-src={product.imageUrl}
+        className="lazyload"
         alt={product.imageAlt}
         boxSize="180px"
       />

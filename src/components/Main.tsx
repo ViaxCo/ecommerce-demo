@@ -9,32 +9,28 @@ import {
   TabList,
   Tab,
   chakra,
-  Text,
-  Tag,
-  Grid,
   useMediaQuery,
 } from "@chakra-ui/react";
 import { BsGridFill } from "react-icons/bs";
 import { IoListOutline } from "react-icons/io5";
-import { searchTags } from "../mockDB/db";
 import Badge from "@material-ui/core/Badge";
-import { useContext } from "react";
+import { ReactNode, useContext } from "react";
 import { GlobalContext } from "../context/GlobalState";
-import loadableVisibility from "react-loadable-visibility/loadable-components";
-import LoadingProduct from "./LoadingProduct";
-
-// Lazy load each product and display them when they become visible in the viewport
-const ProductCard = loadableVisibility(() => import("./ProductCard"), {
-  fallback: <LoadingProduct />,
-});
+import { useHistory, useLocation } from "react-router-dom";
 
 // Give the components chakra props
 const GridIcon = chakra(BsGridFill);
 const ListIcon = chakra(IoListOutline);
 
-const Main = () => {
-  const { products, savedItemsCount } = useContext(GlobalContext);
+type Props = {
+  children: ReactNode;
+};
+
+const Main = ({ children }: Props) => {
+  const { savedItemsCount } = useContext(GlobalContext);
   const [isLargerThan567] = useMediaQuery("(min-width: 567px)");
+  const history = useHistory();
+  const location = useLocation();
 
   return (
     <Box
@@ -97,31 +93,44 @@ const Main = () => {
           </FormControl>
         </HStack>
         <Flex justify="space-between" align="center" flexWrap="wrap" w="100%">
-          <Tabs variant="unstyled" size="sm" mb={5}>
+          <Tabs
+            variant="unstyled"
+            size="sm"
+            mb={5}
+            defaultIndex={
+              location.pathname === "/"
+                ? 0
+                : location.pathname === "/saved"
+                ? 1
+                : undefined
+            }
+          >
             <TabList bg="appBlue.50" rounded="md">
               <Tab
                 _selected={{
-                  border: "1px solid",
-                  borderColor: "gray.200",
                   color: "appBlue.400",
                   bg: "white",
                   rounded: "base",
                   boxShadow: "base",
                 }}
                 fontSize={["xs", "sm"]}
+                onClick={() => {
+                  history.push("/");
+                }}
               >
                 Show All
               </Tab>
               <Tab
                 _selected={{
-                  border: "1px solid",
-                  borderColor: "gray.200",
                   color: "appBlue.400",
                   bg: "white",
                   rounded: "base",
                   boxShadow: "base",
                 }}
                 fontSize={["xs", "sm"]}
+                onClick={() => {
+                  history.push("/saved");
+                }}
               >
                 <Badge badgeContent={savedItemsCount} color="secondary">
                   Saved
@@ -129,14 +138,15 @@ const Main = () => {
               </Tab>
               <Tab
                 _selected={{
-                  border: "1px solid",
-                  borderColor: "gray.200",
                   color: "appBlue.400",
                   bg: "white",
                   rounded: "base",
                   boxShadow: "base",
                 }}
                 fontSize={["xs", "sm"]}
+                onClick={() => {
+                  history.push("/cart");
+                }}
               >
                 Buy now
               </Tab>
@@ -168,31 +178,7 @@ const Main = () => {
           </Tabs>
         </Flex>
       </Flex>
-      <HStack mb={5} spacing={2} flexWrap="wrap">
-        <Text fontWeight="bold" fontSize="sm" mr={3}>
-          Related
-        </Text>
-        {searchTags.map((tag, i) => (
-          <Tag key={i} size="sm" bg="blackAlpha.200" rounded="full" m={1}>
-            {tag}
-          </Tag>
-        ))}
-      </HStack>
-      <Grid
-        p={3}
-        templateColumns="repeat(auto-fit, minmax(240px, 1fr))"
-        gap={3}
-        placeItems="center"
-        placeContent="center"
-      >
-        {products!.map(product => (
-          <ProductCard
-            key={product.id}
-            product={product}
-            className="loading-product"
-          />
-        ))}
-      </Grid>
+      {children}
     </Box>
   );
 };
