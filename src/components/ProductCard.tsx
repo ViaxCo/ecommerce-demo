@@ -14,7 +14,10 @@ import {
 import Rating from "@material-ui/lab/Rating";
 import { isValidMotionProp, motion, MotionProps } from "framer-motion";
 import { useContext } from "react";
-import { BsHeart as HeartIcon } from "react-icons/bs";
+import {
+  BsHeart as HeartIcon,
+  BsHeartFill as HeartIconFill,
+} from "react-icons/bs";
 import { Link as RouterLink } from "react-router-dom";
 import { ShoppingCart } from "../components/Header";
 import { GlobalContext, ProductType } from "../context/GlobalState";
@@ -69,6 +72,12 @@ const ProductCard = ({ product }: Props) => {
           ".product-title": {
             color: "appBlue.600",
           },
+          ".btn": {
+            opacity: 1,
+          },
+          ".btn:disabled": {
+            opacity: 0.4,
+          },
         }}
         transition="all 0.2s ease"
         // animation
@@ -121,14 +130,17 @@ const ProductCard = ({ product }: Props) => {
               </Text>
             </Flex>
             <Button
+              opacity={product.isSaved ? 1 : [1, 0]}
+              className="btn"
               colorScheme="appBlue"
-              variant={product.isSaved ? "solid" : "outline"}
+              variant="outline"
               height={9}
               minW={9}
               w={9}
               fontSize="lg"
               px={2}
               borderRadius="full"
+              border={product.isSaved ? "none" : "1px solid"}
               onClick={() => {
                 toast({
                   title: product.isSaved
@@ -141,11 +153,13 @@ const ProductCard = ({ product }: Props) => {
                 toggleSaved!(product.id);
               }}
             >
-              <HeartIcon />
+              {product.isSaved ? <HeartIconFill /> : <HeartIcon />}
             </Button>
           </Flex>
         </Box>
         <Button
+          opacity={[1, 0]}
+          className="btn"
           mt={3}
           colorScheme="red"
           variant="outline"
