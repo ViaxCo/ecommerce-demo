@@ -47,7 +47,8 @@ const CartItem = ({ product }: Props) => {
         }}
       >
         <Image
-          src={product.imageUrl}
+          data-src={product.imageUrl}
+          className="lazyload"
           alt={product.imageAlt}
           boxSize="100px"
           mr={2}

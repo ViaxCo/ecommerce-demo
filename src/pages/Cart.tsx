@@ -9,9 +9,29 @@ import {
 } from "@chakra-ui/react";
 import { useContext } from "react";
 import { GlobalContext } from "../context/GlobalState";
-import CartItem from "../components/CartItem/CartItem";
-import CartItemMobile from "../components/CartItem/CartItemMobile";
 import { Link as RouterLink } from "react-router-dom";
+import loadableVisibility from "react-loadable-visibility/loadable-components";
+import LoadingCart from "../components/Loading/LoadingCart";
+
+// Lazy load each CartItem and display them when they become visible in the viewport
+const CartItem = loadableVisibility(
+  () =>
+    import(
+      "../components/CartItem/CartItem" /* webpackChunkName: "cart-item" */
+    ),
+  {
+    fallback: <LoadingCart display={{ base: "none", bigTablet: "flex" }} />,
+  }
+);
+const CartItemMobile = loadableVisibility(
+  () =>
+    import(
+      "../components/CartItem/CartItemMobile" /* webpackChunkName: "cart-item-mobile" */
+    ),
+  {
+    fallback: <LoadingCart display={{ base: "flex", bigTablet: "none" }} />,
+  }
+);
 
 const Cart = () => {
   const { products, totalPrice } = useContext(GlobalContext);

@@ -2,7 +2,7 @@ import { HashRouter as Router, Route, Switch } from "react-router-dom";
 import { Provider } from "./context/GlobalState";
 import Saved from "./pages/Saved";
 import loadable from "@loadable/component";
-import ProgressLine from "./components/ProgressLine";
+import ProgressLine from "./components/Loading/ProgressLine";
 import Container from "./components/Container";
 import Header from "./components/Header";
 

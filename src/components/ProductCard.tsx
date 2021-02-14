@@ -15,9 +15,6 @@ import { BsHeart as HeartIcon } from "react-icons/bs";
 import { Link as RouterLink } from "react-router-dom";
 import { ShoppingCart } from "../components/Header";
 import { GlobalContext, ProductType } from "../context/GlobalState";
-import "lazysizes";
-// import a plugin
-import "lazysizes/plugins/parent-fit/ls.parent-fit";
 
 type Props = {
   product: ProductType;

@@ -69,7 +69,8 @@ const CartItemMobile = ({ product }: Props) => {
         }}
       >
         <Image
-          src={product.imageUrl}
+          data-src={product.imageUrl}
+          className="lazyload"
           alt={product.imageAlt}
           w="40%"
           maxWidth="150px"

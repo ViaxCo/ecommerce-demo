@@ -5,13 +5,13 @@ import {
   BreadcrumbItem,
   BreadcrumbLink,
   Text,
-  Grid,
 } from "@chakra-ui/react";
 import { ChevronRightIcon } from "@chakra-ui/icons";
 import { useContext } from "react";
 import { GlobalContext } from "../context/GlobalState";
 import loadableVisibility from "react-loadable-visibility/loadable-components";
-import LoadingProduct from "../components/LoadingProduct";
+import LoadingProduct from "../components/Loading/LoadingProduct";
+import ProductsGrid from "../components/ProductsGrid";
 
 interface ParamsTypes {
   name: string;
@@ -56,13 +56,7 @@ const SearchResults = () => {
           <BreadcrumbLink href="#">Product</BreadcrumbLink>
         </BreadcrumbItem>
       </Breadcrumb>
-      <Grid
-        p={3}
-        templateColumns="repeat(auto-fit, minmax(240px, 1fr))"
-        gap={3}
-        placeItems="center"
-        placeContent="center"
-      >
+      <ProductsGrid>
         {foundProducts.length > 0 ? (
           foundProducts.map(product => (
             <ProductCard
@@ -74,7 +68,7 @@ const SearchResults = () => {
         ) : (
           <Text>No products found</Text>
         )}
-      </Grid>
+      </ProductsGrid>
     </Box>
   );
 };
