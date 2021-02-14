@@ -8,9 +8,12 @@ type Props = {
 const ProductsGrid = ({ children }: Props) => {
   return (
     <Grid
-      p={3}
-      templateColumns="repeat(auto-fit, minmax(240px, 1fr))"
-      gap={3}
+      p={2}
+      templateColumns={[
+        "repeat(auto-fit, minmax(180px, 1fr))",
+        "repeat(auto-fit, minmax(200px, 1fr))",
+      ]}
+      gap={[2, 3]}
       placeItems="center"
       placeContent="center"
     >

@@ -41,9 +41,14 @@ const Main = ({ children }: Props) => {
       rounded="md"
       border="1px solid"
       borderColor="gray.200"
-      p={3}
     >
-      <Flex align="flex-end" justify="space-between" flexWrap="wrap">
+      <Flex
+        p={3}
+        pb={0}
+        align="flex-end"
+        justify="space-between"
+        flexWrap="wrap"
+      >
         <HStack align="flex-end" mr={5} mb={5}>
           <FormControl w="fit-content">
             <FormLabel

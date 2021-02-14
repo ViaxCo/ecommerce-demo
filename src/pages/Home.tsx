@@ -20,7 +20,7 @@ const Home = () => {
   const { products } = useContext(GlobalContext);
   return (
     <Main>
-      <HStack mb={5} spacing={2} flexWrap="wrap">
+      <HStack p={3} mb={5} spacing={2} flexWrap="wrap">
         <Text fontWeight="bold" fontSize="sm" mr={3}>
           Related
         </Text>

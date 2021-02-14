@@ -33,7 +33,7 @@ const styles = {
     ".loading-product": {
       h: "460px",
       w: "100%",
-      maxW: "320px",
+      maxW: "280px",
     },
   },
 };

@@ -13,6 +13,7 @@ import { Link as RouterLink } from "react-router-dom";
 import loadableVisibility from "react-loadable-visibility/loadable-components";
 import LoadingCart from "../components/Loading/LoadingCart";
 import { AnimatePresence } from "framer-motion";
+import { MotionBox } from "../components/ProductCard";
 
 // Lazy load each CartItem and display them when they become visible in the viewport
 const CartItem = loadableVisibility(
@@ -112,14 +113,19 @@ const Cart = () => {
           </HStack>
         </>
       ) : (
-        <Box>
+        <MotionBox
+          opacity={0}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5 }}
+        >
           <Text mb={4}>No Items in your cart</Text>
           <Link as={RouterLink} to="/" _hover={{ textDecoration: "none" }}>
             <Button colorScheme="gray" boxShadow="md">
               Continue Shopping
             </Button>
           </Link>
-        </Box>
+        </MotionBox>
       )}
     </Flex>
   );

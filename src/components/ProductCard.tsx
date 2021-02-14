@@ -40,9 +40,10 @@ const ProductCard = ({ product }: Props) => {
   const toast = useToast();
   return (
     <MotionBox
+      as="article"
       h="460px"
       w="100%"
-      maxW="320px"
+      maxW="280px"
       opacity={0}
       // animation
       initial={{ opacity: 0 }}
@@ -58,8 +59,9 @@ const ProductCard = ({ product }: Props) => {
         as={LinkBox}
         display="flex"
         flexDirection="column"
+        h="100%"
         className="product-card"
-        p={3}
+        p={[2, 3]}
         rounded="md"
         border={["1px solid", "none"]}
         borderColor={["gray.200", "transparent"]}
@@ -77,7 +79,7 @@ const ProductCard = ({ product }: Props) => {
           data-src={product.imageUrl}
           className="lazyload"
           alt={product.imageAlt}
-          boxSize="180px"
+          boxSize="140px"
         />
         <LinkOverlay
           as={RouterLink}
@@ -119,14 +121,14 @@ const ProductCard = ({ product }: Props) => {
               </Text>
             </Flex>
             <Button
-              leftIcon={<HeartIcon />}
               colorScheme="appBlue"
               variant={product.isSaved ? "solid" : "outline"}
-              height={7}
-              minW={7}
-              fontSize="sm"
+              height={9}
+              minW={9}
+              w={9}
+              fontSize="lg"
               px={2}
-              py={3}
+              borderRadius="full"
               onClick={() => {
                 toast({
                   title: product.isSaved
@@ -139,7 +141,7 @@ const ProductCard = ({ product }: Props) => {
                 toggleSaved!(product.id);
               }}
             >
-              Watch
+              <HeartIcon />
             </Button>
           </Flex>
         </Box>
@@ -147,6 +149,7 @@ const ProductCard = ({ product }: Props) => {
           mt={3}
           colorScheme="red"
           variant="outline"
+          fontSize="sm"
           onClick={() => {
             addToCart!(product);
           }}
