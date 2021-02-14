@@ -12,6 +12,7 @@ import { GlobalContext } from "../context/GlobalState";
 import { Link as RouterLink } from "react-router-dom";
 import loadableVisibility from "react-loadable-visibility/loadable-components";
 import LoadingCart from "../components/Loading/LoadingCart";
+import { AnimatePresence } from "framer-motion";
 
 // Lazy load each CartItem and display them when they become visible in the viewport
 const CartItem = loadableVisibility(
@@ -68,12 +69,16 @@ const Cart = () => {
         MY CART
       </Box>
       {/* Duplicated so the children don't have the same key */}
-      {cartItems!.map(product => (
-        <CartItem key={product.id} product={product} />
-      ))}
-      {cartItems!.map(product => (
-        <CartItemMobile key={product.id} product={product} />
-      ))}
+      <AnimatePresence>
+        {cartItems!.map(product => (
+          <CartItem key={product.id} product={product} />
+        ))}
+      </AnimatePresence>
+      <AnimatePresence>
+        {cartItems!.map(product => (
+          <CartItemMobile key={product.id} product={product} />
+        ))}
+      </AnimatePresence>
 
       {cartItems!.length > 0 ? (
         <>
