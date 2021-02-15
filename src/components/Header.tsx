@@ -3,7 +3,6 @@ import {
   Button,
   chakra,
   Flex,
-  Heading,
   HStack,
   Avatar,
   Link,
@@ -22,6 +21,7 @@ import {
 } from "react-router-dom";
 import { useRef, useContext } from "react";
 import { GlobalContext } from "../context/GlobalState";
+import Logo from "./Logo";
 
 // Give the components chakra props
 export const ShoppingCart = chakra(FaShoppingCart);
@@ -58,19 +58,13 @@ const Header = () => {
             color="appBlue.500"
             w="1.5rem"
             h="1.5rem"
-            mr={4}
+            mr={2}
             cursor="pointer"
             ref={hamburgerRef}
             onClick={onOpen}
           />
           <Link as={RouterLink} to="/" _hover={{ textDecoration: "none" }}>
-            <Heading
-              fontSize={["2xl", "3xl"]}
-              fontWeight="medium"
-              color="appBlue.500"
-            >
-              Logo
-            </Heading>
+            <Logo />
           </Link>
         </Flex>
         <SearchBar display={["none", "block"]} />

@@ -3,8 +3,11 @@ import {
   DrawerOverlay,
   DrawerContent,
   DrawerCloseButton,
+  Box,
+  Divider,
 } from "@chakra-ui/react";
 import { RefObject } from "react";
+import Logo from "../Logo";
 import Sidebar from "./Sidebar";
 
 type Props = {
@@ -30,6 +33,10 @@ const SidebarMobile = ({ isOpen, onClose, hamburgerRef }: Props) => {
             left="0.5rem"
             fontSize="1rem"
           />
+          <Box position="absolute" top="1.2rem" right={0} left="3rem">
+            <Logo />
+          </Box>
+          <Divider />
           <Sidebar />
         </DrawerContent>
       </DrawerOverlay>

@@ -44,7 +44,7 @@ const ProductCard = ({ product }: Props) => {
   return (
     <MotionBox
       as="article"
-      h="460px"
+      h="420px"
       w="100%"
       maxW="280px"
       opacity={0}
@@ -85,9 +85,8 @@ const ProductCard = ({ product }: Props) => {
       >
         <Image
           m="auto"
-          data-src={product.imageUrl}
+          data-src={product.image}
           className="lazyload"
-          alt={product.imageAlt}
           boxSize="140px"
         />
         <LinkOverlay
@@ -95,38 +94,77 @@ const ProductCard = ({ product }: Props) => {
           to={{ pathname: `/products/${product.id}` }}
           className="product-title"
         >
-          <Flex direction="column" minH="84px" justify="flex-start">
-            <Text mt={2} fontSize="sm" fontWeight="semibold" lineHeight="short">
+          <Flex direction="column" minH="84px" justify="center">
+            <Text mt={2} fontSize="sm" fontWeight="medium" lineHeight="short">
               {product.title}
-            </Text>
-            <Text fontSize="sm" lineHeight="short">
-              {product.shortDescription}
             </Text>
           </Flex>
         </LinkOverlay>
         <Box>
           <Flex align="center" justify="space-between" h="38px">
-            <Text mt={2} fontSize="xl" fontWeight="bold">
-              ${product.price}
+            <Text fontSize="xl" fontWeight="bold" color="appBlue.600">
+              ${product.price}{" "}
+              <Box
+                as="span"
+                textDecoration="line-through"
+                color="blackAlpha.500"
+                fontSize="md"
+              >
+                {product.id === 1 ||
+                product.id === 4 ||
+                product.id === 7 ||
+                product.id === 10 ||
+                product.id === 12 ||
+                product.id === 16 ||
+                product.id === 19
+                  ? +product.price * 2
+                  : null}
+              </Box>
             </Text>
             <Badge textTransform="uppercase" colorScheme="green">
-              {product.tag}
+              {product.id === 1 ||
+              product.id === 4 ||
+              product.id === 7 ||
+              product.id === 10 ||
+              product.id === 12 ||
+              product.id === 16 ||
+              product.id === 19
+                ? "-50%"
+                : null}
             </Badge>
           </Flex>
-          <Flex mt={2} align="center" h="36px">
-            <Text fontSize="xs">{product.tagline}</Text>
+          <Flex align="center" h="18px">
+            <Text fontSize="xs">Eligible for free shipping</Text>
           </Flex>
-          <Flex mt={2} align="center" justify="space-between" flexWrap="wrap">
+          <Flex mt={1} align="center" justify="space-between" flexWrap="wrap">
             <Flex align="center">
               <Rating
                 name="read-only-stars"
-                value={product.rating}
+                value={
+                  product.id === 1 ||
+                  product.id === 4 ||
+                  product.id === 7 ||
+                  product.id === 10 ||
+                  product.id === 12 ||
+                  product.id === 16 ||
+                  product.id === 19
+                    ? 4.7
+                    : 4.1
+                }
                 precision={0.1}
                 size="small"
                 readOnly
               />
               <Text ml={1} fontSize="sm">
-                {product.rating}
+                {product.id === 1 ||
+                product.id === 4 ||
+                product.id === 7 ||
+                product.id === 10 ||
+                product.id === 12 ||
+                product.id === 16 ||
+                product.id === 19
+                  ? "4.7"
+                  : "4.1"}
               </Text>
             </Flex>
             <Button

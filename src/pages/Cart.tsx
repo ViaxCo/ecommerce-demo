@@ -47,6 +47,7 @@ const Cart = () => {
         fontWeight="bold"
         fontSize="lg"
         mb={3}
+        color="gray.600"
       >
         <Text w="70%" pl={3}>
           Item
@@ -66,6 +67,7 @@ const Cart = () => {
         fontWeight="bold"
         fontSize="lg"
         mb={3}
+        color="gray.600"
       >
         MY CART
       </Box>
@@ -83,16 +85,19 @@ const Cart = () => {
 
       {cartItems!.length > 0 ? (
         <>
-          <Text
-            fontSize={isLargerThan345 ? "2xl" : "xl"}
-            alignSelf="flex-end"
+          <Flex
             mb={4}
+            justifyContent="space-between"
+            w={{ base: "100%", bigTablet: "150px" }}
+            alignSelf={{ base: undefined, bigTablet: "flex-end" }}
           >
-            Total:{" "}
-            <Box as="span" fontWeight="bold">
+            <Text fontSize="lg" fontWeight="semibold">
+              Total:
+            </Text>
+            <Box as="span" fontWeight="bold" color="appBlue.600" fontSize="xl">
               ${totalPrice?.toFixed(2)}
             </Box>
-          </Text>
+          </Flex>
           <HStack spacing={4} alignSelf="flex-end">
             <Link as={RouterLink} to="/" _hover={{ textDecoration: "none" }}>
               <Button

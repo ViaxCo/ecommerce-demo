@@ -30,6 +30,7 @@ const CartItem = ({ product }: Props) => {
 
   return (
     <MotionBox
+      display={{ base: "none", bigTablet: "block" }}
       opacity={0}
       // animation
       initial={{ opacity: 0 }}
@@ -62,11 +63,10 @@ const CartItem = ({ product }: Props) => {
           }}
         >
           <Image
-            data-src={product.imageUrl}
+            data-src={product.image}
             className="lazyload"
-            alt={product.imageAlt}
             boxSize="100px"
-            mr={2}
+            mr={4}
           />
           <Flex direction="column" justify="space-between" overflow="auto">
             <Box>
@@ -75,8 +75,7 @@ const CartItem = ({ product }: Props) => {
                 to={{ pathname: `products/${product.id}` }}
                 className="product-title"
               >
-                <Text fontWeight="bold">{product.title}</Text>
-                <Text fontSize="sm">{product.shortDescription}</Text>
+                <Text fontWeight="medium">{product.title}</Text>
               </LinkOverlay>
             </Box>
             <Flex flexWrap="wrap" mt={2}>
@@ -129,9 +128,11 @@ const CartItem = ({ product }: Props) => {
               setQuantity!(e.target.value, product.id)
             }
           >
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
+            {Array(10)
+              .fill("")
+              .map((_, i) => (
+                <option value={i + 1}>{i + 1}</option>
+              ))}
           </Select>
         </Flex>
         <Flex
@@ -151,6 +152,7 @@ const CartItem = ({ product }: Props) => {
           fontSize="lg"
           justify="center"
           align="center"
+          color="appBlue.600"
         >
           ${subTotal.toFixed(2)}
         </Flex>

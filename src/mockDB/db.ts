@@ -167,9 +167,9 @@ export const mockProducts = [
 ];
 
 export const searchTags = [
-  "worldwide shipping",
-  "under $50 item",
-  "plastic plugs",
-  "pucker shoes",
-  "vintage typewriter",
+  "Free shipping",
+  "Casual shirts",
+  "jewellery",
+  "hard drive",
+  "women's clothing",
 ];

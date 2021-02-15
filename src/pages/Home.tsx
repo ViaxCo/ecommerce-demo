@@ -17,7 +17,7 @@ const ProductCard = loadableVisibility(
 );
 
 const Home = () => {
-  const { products } = useContext(GlobalContext);
+  const { products, isLoading } = useContext(GlobalContext);
   return (
     <Main>
       <HStack p={3} mb={5} spacing={2} flexWrap="wrap">
@@ -31,13 +31,17 @@ const Home = () => {
         ))}
       </HStack>
       <ProductsGrid>
-        {products!.map(product => (
-          <ProductCard
-            key={product.id}
-            product={product}
-            className="loading-product"
-          />
-        ))}
+        {isLoading
+          ? Array(20)
+              .fill("")
+              .map(x => <LoadingProduct />)
+          : products!.map(product => (
+              <ProductCard
+                key={product.id}
+                product={product}
+                className="loading-product"
+              />
+            ))}
       </ProductsGrid>
     </Main>
   );

@@ -31,7 +31,7 @@ const styles = {
       },
     },
     ".loading-product": {
-      h: "460px",
+      h: "420px",
       w: "100%",
       maxW: "280px",
     },

@@ -27,7 +27,7 @@ const Container = ({ children }: Props) => {
         <Box
           display={["none", "block"]}
           minH="100%"
-          w="220px"
+          w="200px"
           py={8}
           color="gray.600"
         >

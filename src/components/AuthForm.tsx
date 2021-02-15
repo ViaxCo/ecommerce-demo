@@ -58,7 +58,6 @@ const AuthForm = ({ authType }: Props) => {
       initialValues={{ email: "", password: "" }}
       onSubmit={(values: Values, actions: FormikHelpers<Values>) => {
         setTimeout(() => {
-          console.log("submitted", values);
           actions.setSubmitting(false);
           actions.resetForm();
         }, 2000);

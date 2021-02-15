@@ -1,6 +1,5 @@
 import { createContext, FC, ReactNode, useState, useEffect } from "react";
 import { useToast } from "@chakra-ui/react";
-import { mockProducts } from "../mockDB/db";
 
 type ContextType = {
   products?: ProductType[];
@@ -13,21 +12,17 @@ type ContextType = {
   decrementQty?: (id: number | string) => void;
   incrementQty?: (id: number | string) => void;
   toggleSaved?: (id: number | string) => void;
+  fetchProducts?: () => Promise<void>;
+  isLoading?: boolean;
 };
 
 export interface ProductType {
-  id: string;
-  imageUrl: string;
-  imageAlt: string | undefined;
-  title: string | null;
-  shortDescription: string | null;
-  description?: string | null;
-  brand?: string | null;
+  id: string | number;
+  title: string;
+  description: string;
   price: string | number;
-  tag: string | null;
-  tagline: string | null;
-  rating: number | null;
-  reviewCount?: number | null;
+  image: string;
+  category: string;
   isSaved?: boolean;
   inCart?: boolean;
   quantity?: number | string;
@@ -39,10 +34,22 @@ export const GlobalContext = createContext<ContextType>({});
 // Provider component
 export const Provider: FC<ReactNode> = ({ children }) => {
   const toast = useToast();
-  const [products, setProducts] = useState<ProductType[]>(mockProducts);
+  const [products, setProducts] = useState<ProductType[]>([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const [cartItemCount, setCartItemCount] = useState(0);
   const [savedItemsCount, setSavedItemsCount] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Fetch products
+  const fetchProducts = async () => {
+    const res = await fetch("https://fakestoreapi.com/products");
+    const products: ProductType[] = await res.json();
+    setProducts(products);
+    setIsLoading(false);
+  };
+  useEffect(() => {
+    fetchProducts();
+  }, []);
 
   useEffect(() => {
     // Get products in cart
@@ -132,6 +139,8 @@ export const Provider: FC<ReactNode> = ({ children }) => {
         incrementQty,
         decrementQty,
         toggleSaved,
+        fetchProducts,
+        isLoading,
       }}
     >
       {children}

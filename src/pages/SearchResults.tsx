@@ -35,9 +35,7 @@ const SearchResults = () => {
         product.title &&
         product.title.toLowerCase().includes(name.toLowerCase())) ||
       (product.description &&
-        product.description.toLowerCase().includes(name.toLowerCase())) ||
-      (product.shortDescription &&
-        product.shortDescription.toLowerCase().includes(name.toLowerCase()))
+        product.description.toLowerCase().includes(name.toLowerCase()))
   );
   return (
     <Box p={3}>

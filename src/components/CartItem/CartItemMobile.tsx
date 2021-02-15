@@ -51,6 +51,7 @@ const CartItemMobile = ({ product }: Props) => {
 
   return (
     <MotionBox
+      display={{ base: "block", bigTablet: "none" }}
       opacity={0}
       // animation
       initial={{ opacity: 0 }}
@@ -84,13 +85,12 @@ const CartItemMobile = ({ product }: Props) => {
           }}
         >
           <Image
-            data-src={product.imageUrl}
+            data-src={product.image}
             className="lazyload"
-            alt={product.imageAlt}
             w="40%"
             maxWidth="150px"
             objectFit="contain"
-            mr={2}
+            mr={4}
           />
           <Flex direction="column" flex={1}>
             <Box>
@@ -99,11 +99,10 @@ const CartItemMobile = ({ product }: Props) => {
                 to={{ pathname: `products/${product.id}` }}
                 className="product-title"
               >
-                <Text fontWeight="bold">{product.title}</Text>
-                <Text fontSize="sm">{product.shortDescription}</Text>
+                <Text fontWeight="medium">{product.title}</Text>
               </LinkOverlay>
             </Box>
-            <Box mt={2} fontWeight="bold" fontSize="lg">
+            <Box mt={2} fontWeight="bold" fontSize="lg" color="appBlue.600">
               ${subTotal.toFixed(2)}
             </Box>
           </Flex>
@@ -184,7 +183,7 @@ const CartItemMobile = ({ product }: Props) => {
               colorScheme="appBlue"
               rounded="full"
               {...inc}
-              disabled={+product.quantity! === 3}
+              disabled={+product.quantity! === 10}
               onClick={() => incrementQty!(product.id)}
               w="17.5%"
             >

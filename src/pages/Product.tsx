@@ -12,23 +12,33 @@ import {
   Text,
   Tag,
   Button,
+  Badge,
 } from "@chakra-ui/react";
 import { ChevronRightIcon } from "@chakra-ui/icons";
 import { ShoppingCart } from "../components/Header";
 import Rating from "@material-ui/lab/Rating";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { GlobalContext } from "../context/GlobalState";
+import ProgressLine from "../components/Loading/ProgressLine";
 
 interface ParamsTypes {
   id: string;
 }
 
 const Product = () => {
-  const { products, addToCart } = useContext(GlobalContext);
+  const { fetchProducts, isLoading, products, addToCart } = useContext(
+    GlobalContext
+  );
   // Get the url parameter (/:id) value
   const { id } = useParams<ParamsTypes>();
-  const product = products!.find(product => product.id === id);
-  return (
+  useEffect(() => {
+    isLoading && fetchProducts!();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  const product = products!.find(product => product.id.toString() === id);
+  return isLoading ? (
+    <ProgressLine />
+  ) : (
     <Box p={3}>
       <Breadcrumb
         fontSize="sm"
@@ -56,31 +66,40 @@ const Product = () => {
         >
           <Image
             m="auto"
-            src={product?.imageUrl}
-            alt={product?.imageAlt}
+            src={product?.image}
+            // alt={product?.imageAlt}
             boxSize="220px"
           />
           <Box>
             <Heading fontSize="2xl" mb={4}>
               {product?.title}
             </Heading>
-            <Text fontSize="sm" fontWeight="medium" mb={4}>
+            {/* <Text fontSize="sm" fontWeight="medium" mb={4}>
               {product?.shortDescription}
-            </Text>
-            <Text fontSize="md" mb={2}>
+            </Text> */}
+            {/* <Text fontSize="md" mb={2}>
               Brand: {product?.brand}
-            </Text>
+            </Text> */}
             <Flex align="center" mb={3}>
               <Rating
                 name="read-only-stars"
-                value={product?.rating}
+                value={
+                  product?.id === 1 ||
+                  product?.id === 4 ||
+                  product?.id === 7 ||
+                  product?.id === 10 ||
+                  product?.id === 12 ||
+                  product?.id === 16 ||
+                  product?.id === 19
+                    ? 4.7
+                    : 4.1
+                }
                 precision={0.1}
                 size="small"
                 readOnly
               />
               <Text ml={1} fontSize="sm">
-                ({product?.reviewCount}{" "}
-                {product?.reviewCount === 1 ? "Rating" : "Ratings"})
+                256 Ratings
               </Text>
             </Flex>
             <Flex mb={2}>
@@ -98,9 +117,43 @@ const Product = () => {
                 XL
               </Tag>
             </Flex>
-            <Text fontSize="2xl" fontWeight="bold" mb={3}>
-              ${product?.price}
-            </Text>
+            <Flex align="center" mb={3}>
+              <Text fontSize="2xl" fontWeight="bold">
+                ${product?.price}{" "}
+                <Box
+                  as="span"
+                  textDecoration="line-through"
+                  color="blackAlpha.500"
+                  fontSize="lg"
+                >
+                  {product?.id === 1 ||
+                  product?.id === 4 ||
+                  product?.id === 7 ||
+                  product?.id === 10 ||
+                  product?.id === 12 ||
+                  product?.id === 16 ||
+                  product?.id === 19
+                    ? +product?.price * 2
+                    : null}
+                </Box>
+              </Text>
+              <Badge
+                ml={4}
+                h="fit-content"
+                textTransform="uppercase"
+                colorScheme="green"
+              >
+                {product?.id === 1 ||
+                product?.id === 4 ||
+                product?.id === 7 ||
+                product?.id === 10 ||
+                product?.id === 12 ||
+                product?.id === 16 ||
+                product?.id === 19
+                  ? "-50%"
+                  : null}
+              </Badge>
+            </Flex>
             <Button
               colorScheme="red"
               onClick={() => {
@@ -125,9 +178,9 @@ const Product = () => {
           </Heading>
           <Text>{product?.description}</Text>
           <Flex justify="flex-end">
-            <Button colorScheme="appBlue" variant="ghost" size="sm">
+            {/* <Button colorScheme="appBlue" variant="ghost" size="sm">
               View more
-            </Button>
+            </Button> */}
           </Flex>
         </Box>
       </Box>

@@ -8,19 +8,12 @@ import {
   Tabs,
   TabList,
   Tab,
-  chakra,
   useMediaQuery,
 } from "@chakra-ui/react";
-import { BsGridFill } from "react-icons/bs";
-import { IoListOutline } from "react-icons/io5";
 import Badge from "@material-ui/core/Badge";
 import { ReactNode, useContext } from "react";
 import { GlobalContext } from "../context/GlobalState";
 import { useHistory, useLocation } from "react-router-dom";
-
-// Give the components chakra props
-const GridIcon = chakra(BsGridFill);
-const ListIcon = chakra(IoListOutline);
 
 type Props = {
   children: ReactNode;
@@ -65,9 +58,7 @@ const Main = ({ children }: Props) => {
               borderColor="gray.500"
               cursor="pointer"
             >
-              <option value="option1">Wellness</option>
-              <option value="option2">Option 2</option>
-              <option value="option3">Option 3</option>
+              <option value="option1">Category</option>
             </Select>
           </FormControl>
           <FormControl w="fit-content">
@@ -78,9 +69,7 @@ const Main = ({ children }: Props) => {
               borderColor="gray.400"
               cursor="pointer"
             >
-              <option value="option1">Free Shipping</option>
-              <option value="option2">Option 2</option>
-              <option value="option3">Option 3</option>
+              <option value="option1">Shipping</option>
             </Select>
           </FormControl>
           <FormControl w="fit-content">
@@ -92,12 +81,10 @@ const Main = ({ children }: Props) => {
               cursor="pointer"
             >
               <option value="option1">Delivery options</option>
-              <option value="option2">Option 2</option>
-              <option value="option3">Option 3</option>
             </Select>
           </FormControl>
         </HStack>
-        <Flex justify="space-between" align="center" flexWrap="wrap" w="100%">
+        <Flex align="center">
           <Tabs
             variant="unstyled"
             size="sm"
@@ -118,7 +105,7 @@ const Main = ({ children }: Props) => {
                   rounded: "base",
                   boxShadow: "base",
                 }}
-                fontSize={["xs", "sm"]}
+                fontSize={isLargerThan567 ? "sm" : "xs"}
                 onClick={() => {
                   history.push("/");
                 }}
@@ -132,7 +119,7 @@ const Main = ({ children }: Props) => {
                   rounded: "base",
                   boxShadow: "base",
                 }}
-                fontSize={["xs", "sm"]}
+                fontSize={isLargerThan567 ? "sm" : "xs"}
                 onClick={() => {
                   history.push("/saved");
                 }}
@@ -148,36 +135,12 @@ const Main = ({ children }: Props) => {
                   rounded: "base",
                   boxShadow: "base",
                 }}
-                fontSize={["xs", "sm"]}
+                fontSize={isLargerThan567 ? "sm" : "xs"}
                 onClick={() => {
                   history.push("/cart");
                 }}
               >
                 Buy now
-              </Tab>
-            </TabList>
-          </Tabs>
-          <Tabs variant="unstyled" size="sm" mb={5}>
-            <TabList bg="appBlue.50" rounded="md">
-              <Tab
-                _selected={{
-                  color: "appBlue.400",
-                  bg: "white",
-                  rounded: "base",
-                  boxShadow: "base",
-                }}
-              >
-                <ListIcon fontSize={["sm", "md"]} />
-              </Tab>
-              <Tab
-                _selected={{
-                  color: "appBlue.400",
-                  bg: "white",
-                  rounded: "base",
-                  boxShadow: "base",
-                }}
-              >
-                <GridIcon fontSize={["sm", "md"]} />
               </Tab>
             </TabList>
           </Tabs>
