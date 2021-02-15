@@ -38,10 +38,11 @@ const SearchResults = () => {
         product.description.toLowerCase().includes(name.toLowerCase()))
   );
   return (
-    <Box p={3}>
+    <Box>
       <Breadcrumb
         fontSize="sm"
         spacing="8px"
+        m={3}
         mb={6}
         color="gray.500"
         separator={<ChevronRightIcon color="gray.500" />}
