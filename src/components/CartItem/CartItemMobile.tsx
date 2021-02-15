@@ -20,6 +20,7 @@ import { useContext } from "react";
 import { Link as RouterLink } from "react-router-dom";
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 import { MotionBox } from "../ProductCard";
+import { Skeleton } from "@material-ui/lab";
 
 type Props = {
   product: ProductType;
@@ -84,14 +85,22 @@ const CartItemMobile = ({ product }: Props) => {
             },
           }}
         >
-          <Image
-            data-src={product.image}
-            className="lazyload"
-            w="40%"
-            maxWidth="150px"
-            objectFit="contain"
-            mr={4}
-          />
+          <Flex align="center" justify="center" w="120px" h="120px" mr={2}>
+            <Image
+              data-src={product.image}
+              className="lazyload"
+              maxW="100%"
+              maxH="100%"
+              objectFit="contain"
+            />
+            <Box w="120px" h="120px">
+              <Skeleton
+                height="120px"
+                style={{ transform: "none" }}
+                animation="wave"
+              />
+            </Box>
+          </Flex>
           <Flex direction="column" flex={1}>
             <Box>
               <LinkOverlay

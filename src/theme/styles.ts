@@ -35,6 +35,16 @@ const styles = {
       w: "100%",
       maxW: "280px",
     },
+    // Optimize image loading
+    ".lazyloading": {
+      display: "none",
+    },
+    ".lazyloaded": {
+      display: "block",
+    },
+    ".lazyloaded ~ div": {
+      display: "none",
+    },
   },
 };
 

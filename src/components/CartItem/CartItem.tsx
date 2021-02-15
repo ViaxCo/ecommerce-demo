@@ -16,6 +16,7 @@ import { ProductType, GlobalContext } from "../../context/GlobalState";
 import { useContext, ChangeEvent } from "react";
 import { Link as RouterLink } from "react-router-dom";
 import { MotionBox } from "../ProductCard";
+import { Skeleton } from "@material-ui/lab";
 
 type Props = {
   product: ProductType;
@@ -62,12 +63,22 @@ const CartItem = ({ product }: Props) => {
             },
           }}
         >
-          <Image
-            data-src={product.image}
-            className="lazyload"
-            boxSize="100px"
-            mr={4}
-          />
+          <Flex align="center" justify="center" w="140px" h="140px" mr={4}>
+            <Image
+              data-src={product.image}
+              className="lazyload"
+              maxW="100%"
+              maxH="100%"
+              objectFit="contain"
+            />
+            <Box w="140px" h="140px">
+              <Skeleton
+                height="140px"
+                style={{ transform: "none" }}
+                animation="wave"
+              />
+            </Box>
+          </Flex>
           <Flex direction="column" justify="space-between" overflow="auto">
             <Box>
               <LinkOverlay
@@ -131,7 +142,9 @@ const CartItem = ({ product }: Props) => {
             {Array(10)
               .fill("")
               .map((_, i) => (
-                <option value={i + 1}>{i + 1}</option>
+                <option key={i} value={i + 1}>
+                  {i + 1}
+                </option>
               ))}
           </Select>
         </Flex>

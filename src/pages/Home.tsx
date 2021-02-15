@@ -34,7 +34,7 @@ const Home = () => {
         {isLoading
           ? Array(20)
               .fill("")
-              .map(x => <LoadingProduct />)
+              .map((_, i) => <LoadingProduct key={i} />)
           : products!.map(product => (
               <ProductCard
                 key={product.id}

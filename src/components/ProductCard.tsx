@@ -11,6 +11,7 @@ import {
   forwardRef,
   ChakraProps,
 } from "@chakra-ui/react";
+import { Skeleton } from "@material-ui/lab";
 import Rating from "@material-ui/lab/Rating";
 import { isValidMotionProp, motion, MotionProps } from "framer-motion";
 import { useContext } from "react";
@@ -83,12 +84,22 @@ const ProductCard = ({ product }: Props) => {
         // animation
         exit={{ opacity: 0 }}
       >
-        <Image
-          m="auto"
-          data-src={product.image}
-          className="lazyload"
-          boxSize="140px"
-        />
+        <Flex align="center" justify="center" w="140px" h="140px" m="auto">
+          <Image
+            data-src={product.image}
+            className="image lazyload"
+            maxW="100%"
+            maxH="100%"
+            objectFit="contain"
+          />
+          <Box w="140px" h="140px">
+            <Skeleton
+              height="140px"
+              style={{ transform: "none" }}
+              animation="wave"
+            />
+          </Box>
+        </Flex>
         <LinkOverlay
           as={RouterLink}
           to={{ pathname: `/products/${product.id}` }}

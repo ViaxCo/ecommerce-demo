@@ -59,27 +59,24 @@ const Product = () => {
         <Stack
           direction={{ base: "column", smallTablet: "row" }}
           spacing={4}
+          m={2}
           mb={8}
           divider={
             <StackDivider borderColor="blackAlpha.300" borderWidth="2px" />
           }
         >
-          <Image
-            m="auto"
-            src={product?.image}
-            // alt={product?.imageAlt}
-            boxSize="220px"
-          />
+          <Flex align="center" justify="center" w="220px" h="220px" m="auto">
+            <Image
+              src={product?.image}
+              maxW="100%"
+              maxH="100%"
+              objectFit="contain"
+            />
+          </Flex>
           <Box>
             <Heading fontSize="2xl" mb={4}>
               {product?.title}
             </Heading>
-            {/* <Text fontSize="sm" fontWeight="medium" mb={4}>
-              {product?.shortDescription}
-            </Text> */}
-            {/* <Text fontSize="md" mb={2}>
-              Brand: {product?.brand}
-            </Text> */}
             <Flex align="center" mb={3}>
               <Rating
                 name="read-only-stars"
@@ -177,11 +174,7 @@ const Product = () => {
             Description
           </Heading>
           <Text>{product?.description}</Text>
-          <Flex justify="flex-end">
-            {/* <Button colorScheme="appBlue" variant="ghost" size="sm">
-              View more
-            </Button> */}
-          </Flex>
+          <Flex justify="flex-end"></Flex>
         </Box>
       </Box>
     </Box>
