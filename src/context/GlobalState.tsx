@@ -1,5 +1,6 @@
 import { createContext, FC, ReactNode, useState, useEffect } from "react";
 import { useToast } from "@chakra-ui/react";
+import seed from "./products.json";
 
 type ContextType = {
   products?: ProductType[];
@@ -42,8 +43,8 @@ export const Provider: FC<ReactNode> = ({ children }) => {
 
   // Fetch products
   const fetchProducts = async () => {
-    const res = await fetch("https://fakestoreapi.com/products");
-    const products: ProductType[] = await res.json();
+    // const res = await fetch("https://fakestoreapi.com/products");
+    const products: ProductType[] = seed;
     setProducts(products);
     setIsLoading(false);
   };
@@ -54,9 +55,7 @@ export const Provider: FC<ReactNode> = ({ children }) => {
   useEffect(() => {
     // Get products in cart
     const productsInCart = products.filter(product => product.inCart === true);
-    const productPrices = productsInCart.map(
-      product => +product.price * +product.quantity!
-    );
+    const productPrices = productsInCart.map(product => +product.price * +product.quantity!);
     setTotalPrice(productPrices.reduce((a, b) => a + b, 0));
     setCartItemCount(productsInCart.length);
     // Get saved products
@@ -67,9 +66,7 @@ export const Provider: FC<ReactNode> = ({ children }) => {
   const toggleSaved = (id: string | number) => {
     setProducts(prevProducts =>
       prevProducts.map(prevProduct =>
-        prevProduct.id === id
-          ? { ...prevProduct, isSaved: !prevProduct.isSaved }
-          : prevProduct
+        prevProduct.id === id ? { ...prevProduct, isSaved: !prevProduct.isSaved } : prevProduct
       )
     );
   };
@@ -83,9 +80,7 @@ export const Provider: FC<ReactNode> = ({ children }) => {
     });
     setProducts(prevProducts =>
       prevProducts.map(prevProduct =>
-        prevProduct.id === product.id
-          ? { ...prevProduct, quantity: 1, inCart: true }
-          : prevProduct
+        prevProduct.id === product.id ? { ...prevProduct, quantity: 1, inCart: true } : prevProduct
       )
     );
   };
