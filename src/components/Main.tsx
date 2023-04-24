@@ -29,7 +29,7 @@ const Main = ({ children }: Props) => {
     <Box
       as="main"
       boxShadow="base"
-      mx={[0, 4]}
+      mx={{ base: 0, sm: 4 }}
       h="100%"
       rounded="md"
       border="1px solid"

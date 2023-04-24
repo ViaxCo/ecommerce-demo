@@ -9,11 +9,11 @@ const ProductsGrid = ({ children }: Props) => {
   return (
     <Grid
       p={2}
-      templateColumns={[
-        "repeat(auto-fit, minmax(180px, 1fr))",
-        "repeat(auto-fit, minmax(200px, 1fr))",
-      ]}
-      gap={[2, 3]}
+      templateColumns={{
+        base: "repeat(auto-fit, minmax(180px, 1fr))",
+        sm: "repeat(auto-fit, minmax(200px, 1fr))",
+      }}
+      gap={{ base: 2, sm: 3 }}
       placeItems="center"
       placeContent="center"
     >

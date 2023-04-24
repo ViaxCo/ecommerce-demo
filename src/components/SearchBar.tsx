@@ -4,13 +4,15 @@ import {
   InputGroup,
   InputLeftElement,
   InputRightElement,
+  ResponsiveValue,
   chakra,
 } from "@chakra-ui/react";
+import { Property } from "csstype";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 type Props = {
-  display: string[];
+  display: ResponsiveValue<Property.Display>;
 };
 
 // Create new Form component and pass it chakra props
@@ -25,7 +27,12 @@ const SearchBar = ({ display }: Props) => {
     if (value !== "") navigate(`/search/${value}`);
   };
   return (
-    <Form display={display} onSubmit={handleSubmit} w={["full", "sm"]} m="0 auto">
+    <Form
+      display={display}
+      onSubmit={handleSubmit}
+      w={{ base: "full", sm: "sm" }}
+      m="0 auto"
+    >
       <InputGroup>
         <InputLeftElement
           pointerEvents="none"
@@ -39,7 +46,7 @@ const SearchBar = ({ display }: Props) => {
             boxShadow: "0 0 0 1px #3564e6",
           }}
           placeholder="Search Items"
-          fontSize={["sm", "md"]}
+          fontSize={{ base: "sm", sm: "md" }}
           _placeholder={{
             color: "gray.600",
           }}

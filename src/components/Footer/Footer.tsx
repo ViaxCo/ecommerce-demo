@@ -9,13 +9,13 @@ const Footer = () => {
       display={{ base: "none", smallTablet: "flex" }}
       bg="appBlue.800"
       color="white"
-      pl={[16, null, "236px"]}
-      pr={[16, null, 8]}
+      pl={{ base: 16, md: "236px" }}
+      pr={{ base: 16, md: 8 }}
       py={5}
-      direction={["column", "row"]}
-      align={["center", "flex-start"]}
+      direction={{ base: "column", sm: "row" }}
+      align={{ base: "center", sm: "flex-start" }}
     >
-      <Flex mr={[0, 32, 44]} mb={[8, null]}>
+      <Flex mr={{ base: 0, sm: 32, md: 44 }} mb={8}>
         <Flex direction="column" mr={28}>
           <Heading as="h6" fontSize="md" mb={6} textTransform="uppercase">
             Pages

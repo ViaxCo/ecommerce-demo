@@ -28,8 +28,8 @@ const Header = () => {
     <Flex
       as="header"
       direction="column"
-      height={["120px", "fit-content"]}
-      px={[3, null]}
+      height={{ base: "120px", sm: "fit-content" }}
+      px={3}
       position="fixed"
       top={0}
       zIndex={10}
@@ -40,13 +40,13 @@ const Header = () => {
       <Flex
         height="65px"
         align="center"
-        px={[null, 2]}
-        py={[7, 9]}
-        justify={["space-between", null]}
+        px={{ sm: 2 }}
+        py={{ base: 7, sm: 9 }}
+        justify="space-between"
       >
         <Flex align="center">
           <HamburgerIcon
-            display={["inline-block", "none"]}
+            display={{ base: "inline-block", sm: "none" }}
             color="appBlue.500"
             w="1.5rem"
             h="1.5rem"
@@ -59,18 +59,18 @@ const Header = () => {
             <Logo />
           </Link>
         </Flex>
-        <SearchBar display={["none", "block"]} />
+        <SearchBar display={{ base: "none", sm: "block" }} />
         <Flex justify="space-between" align="center">
-          <HStack spacing={[3, 5]}>
+          <HStack spacing={{ base: 3, sm: 5 }}>
             <Link
               as={RouterLink}
               to={location.pathname === "/login" ? "/register" : "/login"}
               _hover={{ textDecoration: "none" }}
             >
               <Button
-                height={[8, 9]}
-                minW={[8, 9]}
-                fontSize={["sm", "md"]}
+                height={{ base: 8, sm: 9 }}
+                minW={{ base: 8, sm: 9 }}
+                fontSize={{ base: "sm", sm: "md" }}
                 variant="outline"
                 borderColor="appBlue.400"
                 borderRadius="0.3rem"
@@ -118,8 +118,8 @@ const Header = () => {
               element={
                 <Avatar
                   ml={cartItemCount! > 0 ? [5, 7] : [3, 5]}
-                  width={[7, 8]}
-                  height={[7, 8]}
+                  width={{ base: 7, sm: 8 }}
+                  height={{ base: 7, sm: 8 }}
                   src="https://bit.ly/broken-link"
                   cursor="pointer"
                 />
@@ -128,7 +128,7 @@ const Header = () => {
           </Routes>
         </Flex>
       </Flex>
-      <SearchBar display={["block", "none"]} />
+      <SearchBar display={{ base: "block", sm: "none" }} />
       <SidebarMobile isOpen={isOpen} onClose={onClose} hamburgerRef={hamburgerRef} />
     </Flex>
   );

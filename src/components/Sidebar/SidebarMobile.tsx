@@ -1,10 +1,10 @@
 import {
-  Drawer,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
   Box,
   Divider,
+  Drawer,
+  DrawerCloseButton,
+  DrawerContent,
+  DrawerOverlay,
 } from "@chakra-ui/react";
 import { RefObject } from "react";
 import Logo from "../Logo";
@@ -24,7 +24,7 @@ const SidebarMobile = ({ isOpen, onClose, hamburgerRef }: Props) => {
       onClose={onClose}
       finalFocusRef={hamburgerRef}
     >
-      <DrawerOverlay display={["block", "none"]}>
+      <DrawerOverlay display={{ base: "block", sm: "none" }}>
         <DrawerContent pt={16} color="blackAlpha.700">
           <DrawerCloseButton
             color="appBlue.500"

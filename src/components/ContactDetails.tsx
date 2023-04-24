@@ -13,8 +13,12 @@ const LinkedinIcon = chakra(FaLinkedin);
 
 const ContactDetails = () => {
   return (
-    <Flex direction="column" align={["center", "initial"]}>
-      <Stack direction={["row", "column"]} spacing={4} mb={[5, 8]}>
+    <Flex direction="column" align={{ base: "center", sm: "initial" }}>
+      <Stack
+        direction={{ base: "row", sm: "column" }}
+        spacing={4}
+        mb={{ base: 5, sm: 8 }}
+      >
         <HStack spacing={2}>
           <LocationIcon color="white" size={24} />
           <Text fontSize="sm">7480 Mockingbird Hill</Text>

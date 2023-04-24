@@ -1,10 +1,10 @@
 import { Box, Flex } from "@chakra-ui/react";
-import Header from "../components/Header";
-import Sidebar from "./Sidebar/Sidebar";
-import Footer from "./Footer/Footer";
-import FooterMobile from "./Footer/FooterMobile";
 import { ReactNode } from "react";
 import { useLocation } from "react-router-dom";
+import Header from "../components/Header";
+import Footer from "./Footer/Footer";
+import FooterMobile from "./Footer/FooterMobile";
+import Sidebar from "./Sidebar/Sidebar";
 
 type Props = {
   children: ReactNode;
@@ -23,9 +23,9 @@ const Container = ({ children }: Props) => {
       minH="100vh"
     >
       <Header />
-      <Flex flex={1} minH="100%" mt={["120px", "72px"]}>
+      <Flex flex={1} minH="100%" mt={{ base: "120px", sm: "72px" }}>
         <Box
-          display={["none", "block"]}
+          display={{ base: "none", sm: "block" }}
           minH="100%"
           w="200px"
           py={8}
@@ -33,7 +33,7 @@ const Container = ({ children }: Props) => {
         >
           <Sidebar />
         </Box>
-        <Box flex={1} py={[0, 8]}>
+        <Box flex={1} py={{ base: 0, sm: 8 }}>
           {children}
         </Box>
       </Flex>

@@ -66,10 +66,10 @@ const ProductCard = ({ product }: Props) => {
         flexDirection="column"
         h="100%"
         className="product-card"
-        p={[2, 3]}
+        p={{ base: 2, sm: 3 }}
         rounded="md"
-        border={["1px solid", "none"]}
-        borderColor={["gray.200", "transparent"]}
+        border={{ base: "1px solid", sm: "none" }}
+        borderColor={{ base: "gray.200", sm: "transparent" }}
         _hover={{
           ".product-title": {
             color: "appBlue.600",
@@ -204,7 +204,7 @@ const ProductCard = ({ product }: Props) => {
           </Flex>
         </Box>
         <Button
-          opacity={[1, 0]}
+          opacity={{ base: 1, sm: 0 }}
           className="btn"
           mt={3}
           colorScheme="red"
