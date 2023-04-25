@@ -26,13 +26,7 @@ const Home = () => {
           ? Array(20)
               .fill("")
               .map((_, i) => <LoadingProduct key={i} />)
-          : products?.map(product => (
-              <ProductCard
-                key={product.id}
-                product={product}
-                className="loading-product"
-              />
-            ))}
+          : products?.map(product => <ProductCard key={product.id} product={product} />)}
       </ProductsGrid>
     </Main>
   );

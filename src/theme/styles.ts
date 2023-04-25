@@ -30,11 +30,6 @@ const styles = {
         transform: "scale(1.01)",
       },
     },
-    ".loading-product": {
-      h: "420px",
-      w: "100%",
-      maxW: "280px",
-    },
     // Optimize image loading
     ".lazyloading": {
       display: "none",

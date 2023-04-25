@@ -17,11 +17,7 @@ const Saved = () => {
             <Text>No saved items</Text>
           ) : (
             savedProducts!.map(product => (
-              <ProductCard
-                key={product.id}
-                product={product}
-                className="loading-product"
-              />
+              <ProductCard key={product.id} product={product} />
             ))
           )}
         </AnimatePresence>
