@@ -1,19 +1,11 @@
 import { HStack, Tag, Text } from "@chakra-ui/react";
 import { useContext } from "react";
-import loadableVisibility from "react-loadable-visibility/loadable-components";
 import LoadingProduct from "../components/Loading/LoadingProduct";
 import Main from "../components/Main";
+import ProductCard from "../components/ProductCard";
 import ProductsGrid from "../components/ProductsGrid";
 import { GlobalContext } from "../context/GlobalState";
 import { searchTags } from "../mockDB/db";
-
-// Lazy load each product and display them when they become visible in the viewport
-const ProductCard = loadableVisibility(
-  () => import("../components/ProductCard" /* webpackChunkName: "product-card" */),
-  {
-    fallback: <LoadingProduct />,
-  }
-);
 
 const Home = () => {
   const { products, isLoading } = useContext(GlobalContext);

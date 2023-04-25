@@ -3,9 +3,11 @@ import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Container from "./components/Container";
 import ProgressLine from "./components/Loading/ProgressLine";
 import { Provider } from "./context/GlobalState";
-const Home = loadable(() => import("./pages/Home" /* webpackChunkName: "home" */), {
+
+const Home = loadable(() => import("./pages/Home"), {
   fallback: <ProgressLine />,
 });
+
 const App = () => {
   return (
     <Provider>
