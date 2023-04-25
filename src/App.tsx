@@ -7,6 +7,9 @@ import { Provider } from "./context/GlobalState";
 const Home = loadable(() => import("./pages/Home"), {
   fallback: <ProgressLine />,
 });
+const Product = loadable(() => import("./pages/Product"), {
+  fallback: <ProgressLine />,
+});
 
 const App = () => {
   return (
@@ -15,6 +18,7 @@ const App = () => {
         <Container>
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/products/:id" element={<Product />} />
           </Routes>
         </Container>
       </Router>

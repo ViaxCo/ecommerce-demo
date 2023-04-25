@@ -159,7 +159,7 @@ const ProductCard = ({ product }: Props) => {
                     ? 4.7
                     : 4.1
                 }
-                precision={0.5}
+                precision={0.1}
                 size="small"
                 readOnly
               />
