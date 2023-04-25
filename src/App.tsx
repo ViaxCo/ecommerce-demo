@@ -11,6 +11,9 @@ const Home = loadable(() => import("./pages/Home"), {
 const Product = loadable(() => import("./pages/Product"), {
   fallback: <ProgressLine />,
 });
+const SearchResults = loadable(() => import("./pages/SearchResults"), {
+  fallback: <ProgressLine />,
+});
 
 const App = () => {
   return (
@@ -21,6 +24,7 @@ const App = () => {
             <Route path="/" element={<Home />} />
             <Route path="/products/:id" element={<Product />} />
             <Route path="/saved" element={<Saved />} />
+            <Route path="/search/:name" element={<SearchResults />} />
           </Routes>
         </Container>
       </Router>
