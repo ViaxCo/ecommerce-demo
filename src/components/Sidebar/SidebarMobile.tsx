@@ -1,12 +1,13 @@
 import {
-  Box,
   Divider,
   Drawer,
   DrawerCloseButton,
   DrawerContent,
   DrawerOverlay,
+  Link,
 } from "@chakra-ui/react";
 import { RefObject } from "react";
+import { Link as RouterLink } from "react-router-dom";
 import Logo from "../Logo";
 import Sidebar from "./Sidebar";
 
@@ -33,9 +34,18 @@ const SidebarMobile = ({ isOpen, onClose, hamburgerRef }: Props) => {
             left="0.5rem"
             fontSize="1rem"
           />
-          <Box position="absolute" top="1.2rem" right={0} left="3rem">
+          <Link
+            as={RouterLink}
+            to="/"
+            _hover={{ textDecoration: "none" }}
+            position="absolute"
+            top="1.2rem"
+            right={0}
+            left="3rem"
+            onClick={onClose}
+          >
             <Logo />
-          </Box>
+          </Link>
           <Divider />
           <Sidebar />
         </DrawerContent>
