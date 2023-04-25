@@ -1,4 +1,5 @@
 import { ChevronRightIcon } from "@chakra-ui/icons";
+
 import {
   Badge,
   Box,
@@ -7,6 +8,7 @@ import {
   BreadcrumbLink,
   Button,
   Flex,
+  HStack,
   Heading,
   Icon,
   Image,
@@ -14,8 +16,10 @@ import {
   StackDivider,
   Tag,
   Text,
+  useToast,
 } from "@chakra-ui/react";
 import { useContext, useEffect } from "react";
+import { BsHeart as HeartIcon, BsHeartFill as HeartIconFill } from "react-icons/bs";
 import { FaShoppingCart } from "react-icons/fa";
 import { Link as RouterLink, useParams } from "react-router-dom";
 import ProgressLine from "../components/Loading/ProgressLine";
@@ -23,7 +27,8 @@ import MUIRating from "../components/MUI/MUIRating";
 import { GlobalContext } from "../context/GlobalState";
 
 const Product = () => {
-  const { fetchProducts, isLoading, products, addToCart } = useContext(GlobalContext);
+  const { fetchProducts, isLoading, products, addToCart, toggleSaved } =
+    useContext(GlobalContext);
   // Get the url parameter (/:id) value
   const { id } = useParams();
   useEffect(() => {
@@ -31,6 +36,7 @@ const Product = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const product = products!.find(product => product.id.toString() === id);
+  const toast = useToast();
   return isLoading ? (
     <ProgressLine />
   ) : (
@@ -136,16 +142,42 @@ const Product = () => {
                   : null}
               </Badge>
             </Flex>
-            <Button
-              colorScheme="red"
-              onClick={() => {
-                addToCart?.(product!);
-              }}
-              isDisabled={product!.inCart ? true : false}
-            >
-              <Icon as={FaShoppingCart} mr={3} />
-              {product!.inCart ? "Added to Cart" : "Add to Cart"}
-            </Button>
+            <HStack spacing={3}>
+              <Button
+                colorScheme="red"
+                onClick={() => {
+                  addToCart?.(product!);
+                }}
+                isDisabled={product!.inCart ? true : false}
+              >
+                <Icon as={FaShoppingCart} mr={3} />
+                {product!.inCart ? "Added to Cart" : "Add to Cart"}
+              </Button>
+              <Button
+                colorScheme="appBlue"
+                variant="outline"
+                height={9}
+                minW={9}
+                w={9}
+                fontSize="2xl"
+                px={2}
+                borderRadius="full"
+                border={product!.isSaved ? "none" : "1px solid"}
+                onClick={() => {
+                  toast({
+                    title: product!.isSaved
+                      ? "Product successfully removed from your saved items"
+                      : "Product successfully added to your saved items",
+                    status: "success",
+                    duration: 1500,
+                    isClosable: true,
+                  });
+                  toggleSaved?.(product!.id);
+                }}
+              >
+                {product!.isSaved ? <HeartIconFill /> : <HeartIcon />}
+              </Button>
+            </HStack>
           </Box>
         </Stack>
         <Box
