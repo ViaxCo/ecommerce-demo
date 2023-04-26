@@ -49,6 +49,7 @@ const AuthForm = ({ authType }: Props) => {
   return (
     <Formik
       initialValues={{ email: "", password: "" }}
+      // @ts-expect-error - 'values' is defined and not used just to show that it's possible
       onSubmit={(values: Values, actions: FormikHelpers<Values>) => {
         setTimeout(() => {
           actions.setSubmitting(false);
