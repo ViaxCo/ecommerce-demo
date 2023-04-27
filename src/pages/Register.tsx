@@ -1,7 +1,7 @@
-import AuthForm from "../components/AuthForm";
+import AuthPage from "../components/AuthPage";
 
 const Register = () => {
-  return <AuthForm authType="register" />;
+  return <AuthPage authType="register" />;
 };
 
 export default Register;

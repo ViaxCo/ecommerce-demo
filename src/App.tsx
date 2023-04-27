@@ -1,7 +1,6 @@
 import loadable from "@loadable/component";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Container from "./components/Container";
-import Header from "./components/Header";
 import ProgressLine from "./components/Loading/ProgressLine";
 import { Provider } from "./context/GlobalState";
 import Saved from "./pages/Saved";
@@ -38,7 +37,6 @@ const App = () => {
             <Route path="/cart" element={<Cart />} />
           </Routes>
         </Container>
-        <Header />
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
