@@ -3,7 +3,7 @@ import { AnimatePresence } from "framer-motion";
 import { Link as RouterLink } from "react-router-dom";
 import CartItem from "../components/CartItem/CartItem";
 import CartItemMobile from "../components/CartItem/CartItemMobile";
-import { MotionBox } from "../components/ProductCard";
+import MotionBox from "../components/MotionBox";
 import { useGlobalContext } from "../context/useGlobalContext";
 
 const Cart = () => {

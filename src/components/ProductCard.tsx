@@ -2,9 +2,7 @@ import {
   Badge,
   Box,
   Button,
-  ChakraProps,
   Flex,
-  forwardRef,
   Icon,
   Image,
   LinkBox,
@@ -12,28 +10,14 @@ import {
   Text,
   useToast,
 } from "@chakra-ui/react";
-import { isValidMotionProp, motion, MotionProps } from "framer-motion";
 import { BsHeart as HeartIcon, BsHeartFill as HeartIconFill } from "react-icons/bs";
 import { FaShoppingCart } from "react-icons/fa";
 import { Link as RouterLink } from "react-router-dom";
 import { ProductType } from "../context/GlobalState";
 import { useGlobalContext } from "../context/useGlobalContext";
+import MotionBox from "./MotionBox";
 import MUIRating from "./MUI/MUIRating";
 import MUISkeleton from "./MUI/MUISkeleton";
-
-// Create a custom motion component from Box
-export const MotionBox = motion(
-  forwardRef<MotionProps & ChakraProps, "div">((props, ref) => {
-    const chakraProps = Object.fromEntries(
-      // do not pass framer props to DOM element
-      Object.entries(props).filter(([key]) => !isValidMotionProp(key))
-    );
-    return <Box ref={ref} {...chakraProps} />;
-  }),
-  {
-    forwardMotionProps: true,
-  }
-);
 
 type Props = {
   product: ProductType;

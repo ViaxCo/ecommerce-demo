@@ -16,7 +16,7 @@ import { Link as RouterLink } from "react-router-dom";
 import { ProductType } from "../../context/GlobalState";
 import { useGlobalContext } from "../../context/useGlobalContext";
 import MUISkeleton from "../MUI/MUISkeleton";
-import { MotionBox } from "../ProductCard";
+import MotionBox from "../MotionBox";
 
 type Props = {
   product: ProductType;
