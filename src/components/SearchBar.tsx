@@ -53,18 +53,18 @@ const SearchBar = ({ display }: Props) => {
           value={value}
           onChange={(e: ChangeEvent<HTMLInputElement>) => setValue(e.target.value)}
         />
-        <InputRightElement
-          children={
-            value && (
+        {value && (
+          <InputRightElement
+            children={
               <CloseIcon
                 color="appBlue.400"
                 fontSize={12}
                 cursor="pointer"
                 onClick={() => setValue("")}
               />
-            )
-          }
-        />
+            }
+          />
+        )}
       </InputGroup>
     </Form>
   );
