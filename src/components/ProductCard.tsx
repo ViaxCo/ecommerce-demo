@@ -127,7 +127,7 @@ const ProductCard = ({ product }: Props) => {
                 {isWithinRange(+product.id) ? +product.price * 2 : null}
               </Box>
             </Text>
-            <Badge textTransform="uppercase" colorScheme="green">
+            <Badge colorScheme="green">
               {isWithinRange(+product.id) ? "-50%" : null}
             </Badge>
           </Flex>
