@@ -43,6 +43,12 @@ type Props = {
 const ProductCard = ({ product }: Props) => {
   const { addToCart, toggleSaved } = useGlobalContext();
   const toast = useToast();
+
+  const isWithinRange = (item: number) => {
+    const nums = [1, 4, 7, 10, 12, 16, 19];
+    return nums.includes(item);
+  };
+
   return (
     <MotionBox
       as="article"
@@ -118,27 +124,11 @@ const ProductCard = ({ product }: Props) => {
                 color="blackAlpha.500"
                 fontSize="md"
               >
-                {product.id === 1 ||
-                product.id === 4 ||
-                product.id === 7 ||
-                product.id === 10 ||
-                product.id === 12 ||
-                product.id === 16 ||
-                product.id === 19
-                  ? +product.price * 2
-                  : null}
+                {isWithinRange(+product.id) ? +product.price * 2 : null}
               </Box>
             </Text>
             <Badge textTransform="uppercase" colorScheme="green">
-              {product.id === 1 ||
-              product.id === 4 ||
-              product.id === 7 ||
-              product.id === 10 ||
-              product.id === 12 ||
-              product.id === 16 ||
-              product.id === 19
-                ? "-50%"
-                : null}
+              {isWithinRange(+product.id) ? "-50%" : null}
             </Badge>
           </Flex>
           <Flex align="center" h="18px">
@@ -148,31 +138,13 @@ const ProductCard = ({ product }: Props) => {
             <Flex align="center">
               <MUIRating
                 name="read-only-stars"
-                value={
-                  product.id === 1 ||
-                  product.id === 4 ||
-                  product.id === 7 ||
-                  product.id === 10 ||
-                  product.id === 12 ||
-                  product.id === 16 ||
-                  product.id === 19
-                    ? 4.7
-                    : 4.1
-                }
+                value={isWithinRange(+product.id) ? 4.7 : 4.1}
                 precision={0.1}
                 size="small"
                 readOnly
               />
               <Text ml={1} fontSize="sm">
-                {product.id === 1 ||
-                product.id === 4 ||
-                product.id === 7 ||
-                product.id === 10 ||
-                product.id === 12 ||
-                product.id === 16 ||
-                product.id === 19
-                  ? "4.7"
-                  : "4.1"}
+                {isWithinRange(+product.id) ? "4.7" : "4.1"}
               </Text>
             </Flex>
             <Button
