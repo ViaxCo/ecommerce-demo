@@ -5,15 +5,15 @@ import {
   FormLabel,
   HStack,
   Select,
-  Tab,
   TabList,
   Tabs,
   useMediaQuery,
 } from "@chakra-ui/react";
 import { ReactNode } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useGlobalContext } from "../context/useGlobalContext";
 import MUIBadge from "./MUI/MUIBadge";
+import Tab from "./Tab";
 
 type Props = {
   children: ReactNode;
@@ -22,7 +22,6 @@ type Props = {
 const Main = ({ children }: Props) => {
   const { savedItemsCount } = useGlobalContext();
   const [isLargerThan567] = useMediaQuery("(min-width: 567px)");
-  const navigate = useNavigate();
   const location = useLocation();
 
   return (
@@ -88,46 +87,13 @@ const Main = ({ children }: Props) => {
             }
           >
             <TabList bg="appBlue.50" rounded="md">
-              <Tab
-                _selected={{
-                  color: "appBlue.400",
-                  bg: "white",
-                  rounded: "base",
-                  boxShadow: "base",
-                }}
-                fontSize={isLargerThan567 ? "sm" : "xs"}
-                onClick={() => {
-                  navigate("/");
-                }}
-              >
+              <Tab mediaQuery={isLargerThan567} navigatePath="/">
                 Show All
               </Tab>
-              <Tab
-                _selected={{
-                  color: "appBlue.400",
-                  bg: "white",
-                  rounded: "base",
-                  boxShadow: "base",
-                }}
-                fontSize={isLargerThan567 ? "sm" : "xs"}
-                onClick={() => {
-                  navigate("/saved");
-                }}
-              >
+              <Tab mediaQuery={isLargerThan567} navigatePath="/saved">
                 <MUIBadge badgeContent={savedItemsCount}>Saved</MUIBadge>
               </Tab>
-              <Tab
-                _selected={{
-                  color: "appBlue.400",
-                  bg: "white",
-                  rounded: "base",
-                  boxShadow: "base",
-                }}
-                fontSize={isLargerThan567 ? "sm" : "xs"}
-                onClick={() => {
-                  navigate("/cart");
-                }}
-              >
+              <Tab mediaQuery={isLargerThan567} navigatePath="/cart">
                 Buy now
               </Tab>
             </TabList>
