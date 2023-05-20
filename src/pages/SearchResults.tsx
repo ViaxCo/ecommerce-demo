@@ -1,17 +1,16 @@
 import { ChevronRightIcon } from "@chakra-ui/icons";
 import { Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Text } from "@chakra-ui/react";
-import { useContext } from "react";
 import { Link as RouterLink, useParams } from "react-router-dom";
 import ProductCard from "../components/ProductCard";
 import ProductsGrid from "../components/ProductsGrid";
 
 import { AnimatePresence } from "framer-motion";
-import { GlobalContext } from "../context/GlobalState";
+import { useGlobalContext } from "../context/useGlobalContext";
 
 const SearchResults = () => {
-  const { products } = useContext(GlobalContext);
+  const { products } = useGlobalContext();
   const { name } = useParams();
-  const foundProducts = products!.filter(
+  const foundProducts = products.filter(
     product =>
       (name &&
         product &&

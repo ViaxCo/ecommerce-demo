@@ -13,11 +13,11 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { isValidMotionProp, motion, MotionProps } from "framer-motion";
-import { useContext } from "react";
 import { BsHeart as HeartIcon, BsHeartFill as HeartIconFill } from "react-icons/bs";
 import { FaShoppingCart } from "react-icons/fa";
 import { Link as RouterLink } from "react-router-dom";
-import { GlobalContext, ProductType } from "../context/GlobalState";
+import { ProductType } from "../context/GlobalState";
+import { useGlobalContext } from "../context/useGlobalContext";
 import MUIRating from "./MUI/MUIRating";
 import MUISkeleton from "./MUI/MUISkeleton";
 
@@ -41,7 +41,7 @@ type Props = {
 };
 
 const ProductCard = ({ product }: Props) => {
-  const { addToCart, toggleSaved } = useContext(GlobalContext);
+  const { addToCart, toggleSaved } = useGlobalContext();
   const toast = useToast();
   return (
     <MotionBox
@@ -196,7 +196,7 @@ const ProductCard = ({ product }: Props) => {
                   duration: 1500,
                   isClosable: true,
                 });
-                toggleSaved?.(product.id);
+                toggleSaved(product.id);
               }}
             >
               {product.isSaved ? <HeartIconFill /> : <HeartIcon />}
@@ -211,7 +211,7 @@ const ProductCard = ({ product }: Props) => {
           variant="outline"
           fontSize="sm"
           onClick={() => {
-            addToCart?.(product);
+            addToCart(product);
           }}
           isDisabled={product.inCart ? true : false}
         >

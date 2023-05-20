@@ -9,11 +9,12 @@ import {
   Text,
   useToast,
 } from "@chakra-ui/react";
-import { ChangeEvent, useContext } from "react";
+import { ChangeEvent } from "react";
 import { BiTrash as TrashIcon } from "react-icons/bi";
 import { BsHeart as HeartIcon, BsHeartFill as HeartIconFill } from "react-icons/bs";
 import { Link as RouterLink } from "react-router-dom";
-import { GlobalContext, ProductType } from "../../context/GlobalState";
+import { ProductType } from "../../context/GlobalState";
+import { useGlobalContext } from "../../context/useGlobalContext";
 import MUISkeleton from "../MUI/MUISkeleton";
 import { MotionBox } from "../ProductCard";
 
@@ -23,8 +24,10 @@ type Props = {
 
 const CartItem = ({ product }: Props) => {
   const toast = useToast();
-  const { setQuantity, deleteFromCart, toggleSaved } = useContext(GlobalContext);
-  const subTotal = +product.price * +product.quantity!;
+  const { setQuantity, deleteFromCart, toggleSaved } = useGlobalContext();
+  // Checking if product is in cart is unnecessary but it's required for `quantity` to be accessible
+  const productQuantity = product.inCart ? product.quantity : 0;
+  const subTotal = +product.price * +productQuantity;
 
   return (
     <MotionBox
@@ -101,7 +104,7 @@ const CartItem = ({ product }: Props) => {
                     duration: 1500,
                     isClosable: true,
                   });
-                  toggleSaved?.(product.id);
+                  toggleSaved(product.id);
                 }}
               >
                 Save Item
@@ -111,7 +114,7 @@ const CartItem = ({ product }: Props) => {
                 colorScheme="red"
                 variant="ghost"
                 size="sm"
-                onClick={() => deleteFromCart?.(product.id)}
+                onClick={() => deleteFromCart(product.id)}
               >
                 Remove Item
               </Button>
@@ -131,9 +134,9 @@ const CartItem = ({ product }: Props) => {
             maxW={16}
             m="auto"
             rounded="md"
-            value={product.quantity}
+            value={productQuantity}
             onChange={(e: ChangeEvent<HTMLSelectElement>) =>
-              setQuantity?.(e.target.value, product.id)
+              setQuantity(e.target.value, product.id)
             }
           >
             {Array(10)

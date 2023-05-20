@@ -1,14 +1,13 @@
 import { HStack, Tag, Text } from "@chakra-ui/react";
-import { useContext } from "react";
 import LoadingProduct from "../components/Loading/LoadingProduct";
 import Main from "../components/Main";
 import ProductCard from "../components/ProductCard";
 import ProductsGrid from "../components/ProductsGrid";
-import { GlobalContext } from "../context/GlobalState";
+import { useGlobalContext } from "../context/useGlobalContext";
 import { searchTags } from "../mockDB/db";
 
 const Home = () => {
-  const { products, isLoading } = useContext(GlobalContext);
+  const { products, isLoading } = useGlobalContext();
   return (
     <Main>
       <HStack p={3} mb={5} spacing={2} flexWrap="wrap">
@@ -26,7 +25,7 @@ const Home = () => {
           ? Array(20)
               .fill("")
               .map((_, i) => <LoadingProduct key={i} />)
-          : products?.map(product => <ProductCard key={product.id} product={product} />)}
+          : products.map(product => <ProductCard key={product.id} product={product} />)}
       </ProductsGrid>
     </Main>
   );

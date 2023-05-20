@@ -13,11 +13,11 @@ import {
   useNumberInput,
   useToast,
 } from "@chakra-ui/react";
-import { useContext } from "react";
 import { BiTrash } from "react-icons/bi";
 import { BsHeart as HeartIcon, BsHeartFill as HeartIconFill } from "react-icons/bs";
 import { Link as RouterLink } from "react-router-dom";
-import { GlobalContext, ProductType } from "../../context/GlobalState";
+import { ProductType } from "../../context/GlobalState";
+import { useGlobalContext } from "../../context/useGlobalContext";
 import MUISkeleton from "../MUI/MUISkeleton";
 import { MotionBox } from "../ProductCard";
 
@@ -30,9 +30,12 @@ const TrashIcon = chakra(BiTrash);
 
 const CartItemMobile = ({ product }: Props) => {
   const toast = useToast();
-  const subTotal = +product.price * +product.quantity!;
-  const { deleteFromCart, incrementQty, decrementQty, toggleSaved } =
-    useContext(GlobalContext);
+
+  // Checking if product is in cart is unnecessary but it's required for `quantity` to be accessible
+  const productQuantity = product.inCart ? product.quantity : 0;
+  const subTotal = +product.price * +productQuantity;
+
+  const { deleteFromCart, incrementQty, decrementQty, toggleSaved } = useGlobalContext();
 
   const { getInputProps, getIncrementButtonProps, getDecrementButtonProps } =
     useNumberInput();
@@ -121,7 +124,7 @@ const CartItemMobile = ({ product }: Props) => {
                 duration: 1500,
                 isClosable: true,
               });
-              toggleSaved?.(product.id);
+              toggleSaved(product.id);
             }}
             px={2}
             borderRight="1px solid"
@@ -134,7 +137,7 @@ const CartItemMobile = ({ product }: Props) => {
             variant="ghost"
             size="md"
             px={2}
-            onClick={() => deleteFromCart?.(product.id)}
+            onClick={() => deleteFromCart(product.id)}
           >
             <TrashIcon mr={1} sx={{ "@media(max-width:365px)": { marginRight: 0 } }} />
             <Box
@@ -151,8 +154,8 @@ const CartItemMobile = ({ product }: Props) => {
               colorScheme="appBlue"
               rounded="full"
               {...dec}
-              disabled={+product.quantity! === 1}
-              onClick={() => decrementQty?.(product.id)}
+              disabled={+productQuantity === 1}
+              onClick={() => decrementQty(product.id)}
               w="17.5%"
             >
               <MinusIcon />
@@ -160,7 +163,7 @@ const CartItemMobile = ({ product }: Props) => {
             <Input
               size="sm"
               {...input}
-              value={product.quantity}
+              value={productQuantity}
               readOnly
               pattern="^[-+]?[0-9]\d*(\.\d+)?$"
               w="65%"
@@ -173,8 +176,8 @@ const CartItemMobile = ({ product }: Props) => {
               colorScheme="appBlue"
               rounded="full"
               {...inc}
-              disabled={+product.quantity! === 10}
-              onClick={() => incrementQty?.(product.id)}
+              disabled={+productQuantity === 10}
+              onClick={() => incrementQty(product.id)}
               w="17.5%"
             >
               <AddIcon />

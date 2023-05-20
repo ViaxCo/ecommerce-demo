@@ -3,36 +3,46 @@ import { FC, ReactNode, createContext, useEffect, useState } from "react";
 import seed from "./products.json";
 
 type ContextType = {
-  products?: ProductType[];
-  cartItemCount?: number;
-  totalPrice?: number;
-  savedItemsCount?: number;
-  addToCart?: (product: ProductType) => void;
-  deleteFromCart?: (id: number | string) => void;
-  setQuantity?: (qty: string, id: number | string) => void;
-  decrementQty?: (id: number | string) => void;
-  incrementQty?: (id: number | string) => void;
-  toggleSaved?: (id: number | string) => void;
-  fetchProducts?: () => Promise<void>;
-  isLoading?: boolean;
+  products: ProductType[];
+  cartItemCount: number;
+  totalPrice: number;
+  savedItemsCount: number;
+  addToCart: (product: ProductType) => void;
+  deleteFromCart: (id: number | string) => void;
+  setQuantity: (qty: string, id: number | string) => void;
+  decrementQty: (id: number | string) => void;
+  incrementQty: (id: number | string) => void;
+  toggleSaved: (id: number | string) => void;
+  fetchProducts: () => Promise<void>;
+  isLoading: boolean;
 };
-
-export interface ProductType {
+type Product = {
   id: string | number;
   title: string;
   description: string;
   price: string | number;
   image: string;
   category: string;
-  isSaved?: boolean;
-  inCart?: boolean;
-  quantity?: number | string;
-}
+};
+
+// `quantity` can only exist if `inCart` is true
+export type ProductType =
+  | (Product & {
+      isSaved?: boolean;
+      inCart: true;
+      quantity: number | string;
+    })
+  | (Product & {
+      isSaved?: boolean;
+      inCart?: false | undefined;
+      quantity?: never;
+    });
+
 interface Props {
   children: ReactNode;
 }
 // Create context
-export const GlobalContext = createContext<ContextType>({});
+export const GlobalContext = createContext<ContextType | null>(null);
 
 // Provider component
 export const Provider: FC<Props> = ({ children }) => {
@@ -57,9 +67,13 @@ export const Provider: FC<Props> = ({ children }) => {
   useEffect(() => {
     // Get products in cart
     const productsInCart = products.filter(product => product.inCart === true);
-    const productPrices = productsInCart.map(
-      product => +product.price * +product.quantity!
-    );
+    const productPrices = productsInCart.map(product => {
+      // This check is unnecessary since all products are in cart, but it's required for `quantity` to be accessible
+      if (product.inCart) {
+        return +product.price * +product.quantity;
+      }
+      return 0;
+    });
     setTotalPrice(productPrices.reduce((a, b) => a + b, 0));
     setCartItemCount(productsInCart.length);
     // Get saved products
@@ -96,7 +110,9 @@ export const Provider: FC<Props> = ({ children }) => {
   const deleteFromCart = (id: number | string) => {
     setProducts(prevProducts =>
       prevProducts.map(prevProduct =>
-        prevProduct.id === id ? { ...prevProduct, inCart: false } : prevProduct
+        prevProduct.id === id
+          ? { ...prevProduct, inCart: false, quantity: undefined }
+          : prevProduct
       )
     );
   };
@@ -104,7 +120,9 @@ export const Provider: FC<Props> = ({ children }) => {
   const setQuantity = (qty: string, id: number | string) => {
     setProducts(prevProducts =>
       prevProducts.map(prevProduct =>
-        prevProduct.id === id ? { ...prevProduct, quantity: qty } : prevProduct
+        prevProduct.inCart && prevProduct.id === id
+          ? { ...prevProduct, quantity: qty }
+          : prevProduct
       )
     );
   };
@@ -112,8 +130,8 @@ export const Provider: FC<Props> = ({ children }) => {
   const decrementQty = (id: number | string) => {
     setProducts(prevProducts =>
       prevProducts.map(prevProduct =>
-        prevProduct.id === id
-          ? { ...prevProduct, quantity: +prevProduct.quantity! - 1 }
+        prevProduct.inCart && prevProduct.id === id
+          ? { ...prevProduct, quantity: +prevProduct.quantity - 1 }
           : prevProduct
       )
     );
@@ -122,8 +140,8 @@ export const Provider: FC<Props> = ({ children }) => {
   const incrementQty = (id: number | string) => {
     setProducts(prevProducts =>
       prevProducts.map(prevProduct =>
-        prevProduct.id === id
-          ? { ...prevProduct, quantity: +prevProduct.quantity! + 1 }
+        prevProduct.inCart && prevProduct.id === id
+          ? { ...prevProduct, quantity: +prevProduct.quantity + 1 }
           : prevProduct
       )
     );

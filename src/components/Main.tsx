@@ -10,9 +10,9 @@ import {
   Tabs,
   useMediaQuery,
 } from "@chakra-ui/react";
-import { ReactNode, useContext } from "react";
+import { ReactNode } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { GlobalContext } from "../context/GlobalState";
+import { useGlobalContext } from "../context/useGlobalContext";
 import MUIBadge from "./MUI/MUIBadge";
 
 type Props = {
@@ -20,7 +20,7 @@ type Props = {
 };
 
 const Main = ({ children }: Props) => {
-  const { savedItemsCount } = useContext(GlobalContext);
+  const { savedItemsCount } = useGlobalContext();
   const [isLargerThan567] = useMediaQuery("(min-width: 567px)");
   const navigate = useNavigate();
   const location = useLocation();

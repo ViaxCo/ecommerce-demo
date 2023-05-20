@@ -1,15 +1,14 @@
 import { Box, Button, Flex, HStack, Link, Text, useMediaQuery } from "@chakra-ui/react";
 import { AnimatePresence } from "framer-motion";
-import { useContext } from "react";
 import { Link as RouterLink } from "react-router-dom";
 import CartItem from "../components/CartItem/CartItem";
 import CartItemMobile from "../components/CartItem/CartItemMobile";
 import { MotionBox } from "../components/ProductCard";
-import { GlobalContext } from "../context/GlobalState";
+import { useGlobalContext } from "../context/useGlobalContext";
 
 const Cart = () => {
-  const { products, totalPrice } = useContext(GlobalContext);
-  const cartItems = products?.filter(product => product.inCart === true);
+  const { products, totalPrice } = useGlobalContext();
+  const productsInCart = products.filter(product => product.inCart === true);
   const [isLargerThan345] = useMediaQuery("(min-width: 345px)");
 
   return (
@@ -45,17 +44,17 @@ const Cart = () => {
       </Box>
       {/* Duplicated so the children don't have the same key */}
       <AnimatePresence>
-        {cartItems?.map(product => (
+        {productsInCart.map(product => (
           <CartItem key={product.id} product={product} />
         ))}
       </AnimatePresence>
       <AnimatePresence>
-        {cartItems?.map(product => (
+        {productsInCart.map(product => (
           <CartItemMobile key={product.id} product={product} />
         ))}
       </AnimatePresence>
 
-      {cartItems!.length > 0 ? (
+      {productsInCart.length > 0 ? (
         <>
           <Flex
             mb={4}
@@ -67,7 +66,7 @@ const Cart = () => {
               Total:
             </Text>
             <Box as="span" fontWeight="bold" color="appBlue.600" fontSize="xl">
-              ${totalPrice?.toFixed(2)}
+              ${totalPrice.toFixed(2)}
             </Box>
           </Flex>
           <HStack spacing={4} alignSelf="flex-end">

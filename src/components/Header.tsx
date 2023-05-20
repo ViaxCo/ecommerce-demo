@@ -9,17 +9,17 @@ import {
   Link,
   useDisclosure,
 } from "@chakra-ui/react";
-import { useContext, useRef } from "react";
+import { useRef } from "react";
 import { FaShoppingCart } from "react-icons/fa";
 import { Route, Link as RouterLink, Routes, useLocation } from "react-router-dom";
-import { GlobalContext } from "../context/GlobalState";
+import { useGlobalContext } from "../context/useGlobalContext";
 import Logo from "./Logo";
 import MUIBadge from "./MUI/MUIBadge";
 import SearchBar from "./SearchBar";
 import SidebarMobile from "./Sidebar/SidebarMobile";
 
 const Header = () => {
-  const { cartItemCount } = useContext(GlobalContext);
+  const { cartItemCount } = useGlobalContext();
 
   const location = useLocation();
   const hamburgerRef = useRef<SVGSVGElement>(null);
@@ -117,7 +117,7 @@ const Header = () => {
               path="*"
               element={
                 <Avatar
-                  ml={cartItemCount! > 0 ? [5, 7] : [3, 5]}
+                  ml={cartItemCount > 0 ? [5, 7] : [3, 5]}
                   width={{ base: 7, sm: 8 }}
                   height={{ base: 7, sm: 8 }}
                   src="https://bit.ly/broken-link"
