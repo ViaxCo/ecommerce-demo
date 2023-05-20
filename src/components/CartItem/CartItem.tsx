@@ -92,7 +92,7 @@ const CartItem = ({ product }: Props) => {
             <Flex flexWrap="wrap" mt={2}>
               <Button
                 leftIcon={product.isSaved ? <HeartIconFill /> : <HeartIcon />}
-                colorScheme="red"
+                colorScheme="appBlue"
                 variant="ghost"
                 size="sm"
                 onClick={() => {

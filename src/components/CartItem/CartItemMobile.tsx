@@ -112,7 +112,7 @@ const CartItemMobile = ({ product }: Props) => {
 
         <Flex mt={3}>
           <Button
-            colorScheme="red"
+            colorScheme="appBlue"
             variant="ghost"
             size="md"
             onClick={() => {
