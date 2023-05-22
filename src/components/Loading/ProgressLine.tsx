@@ -7,7 +7,7 @@ const ProgressLine = () => {
     <Progress
       mt={
         location.pathname === "/login" || location.pathname === "/register"
-          ? ["120px", "72px"]
+          ? { base: "120px", sm: "72px" }
           : 0
       }
       size="xs"

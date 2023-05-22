@@ -117,7 +117,7 @@ const Header = () => {
               path="*"
               element={
                 <Avatar
-                  ml={cartItemCount > 0 ? [5, 7] : [3, 5]}
+                  ml={cartItemCount > 0 ? { base: 5, sm: 7 } : { base: 3, sm: 5 }}
                   width={{ base: 7, sm: 8 }}
                   height={{ base: 7, sm: 8 }}
                   src="https://bit.ly/broken-link"

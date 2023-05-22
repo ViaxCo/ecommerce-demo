@@ -15,9 +15,9 @@ import { FaShoppingCart } from "react-icons/fa";
 import { Link as RouterLink } from "react-router-dom";
 import { ProductType } from "../context/GlobalState";
 import { useGlobalContext } from "../context/useGlobalContext";
-import MotionBox from "./MotionBox";
 import MUIRating from "./MUI/MUIRating";
 import MUISkeleton from "./MUI/MUISkeleton";
+import MotionBox from "./MotionBox";
 
 type Props = {
   product: ProductType;
@@ -132,7 +132,7 @@ const ProductCard = ({ product }: Props) => {
               </Text>
             </Flex>
             <Button
-              opacity={product.isSaved ? 1 : [1, 0]}
+              opacity={product.isSaved ? 1 : { base: 1, sm: 0 }}
               className="btn"
               colorScheme="appBlue"
               variant="outline"
