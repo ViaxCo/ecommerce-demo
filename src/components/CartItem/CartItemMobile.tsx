@@ -16,13 +16,13 @@ import {
 import { BiTrash } from "react-icons/bi";
 import { BsHeart as HeartIcon, BsHeartFill as HeartIconFill } from "react-icons/bs";
 import { Link as RouterLink } from "react-router-dom";
-import { ProductType } from "../../context/GlobalState";
+import { ProductInCart } from "../../context/GlobalState";
 import { useGlobalContext } from "../../context/useGlobalContext";
 import MUISkeleton from "../MUI/MUISkeleton";
 import MotionBox from "../MotionBox";
 
 type Props = {
-  product: ProductType;
+  product: ProductInCart;
 };
 
 // Give the components chakra props
@@ -30,10 +30,7 @@ const TrashIcon = chakra(BiTrash);
 
 const CartItemMobile = ({ product }: Props) => {
   const toast = useToast();
-
-  // Checking if product is in cart is unnecessary but it's required for `quantity` to be accessible
-  const productQuantity = product.inCart ? product.quantity : 0;
-  const subTotal = +product.price * +productQuantity;
+  const subTotal = +product.price * +product.quantity;
 
   const { deleteFromCart, incrementQty, decrementQty, toggleSaved } = useGlobalContext();
 
@@ -154,7 +151,7 @@ const CartItemMobile = ({ product }: Props) => {
               colorScheme="appBlue"
               rounded="full"
               {...dec}
-              disabled={+productQuantity === 1}
+              disabled={+product.quantity === 1}
               onClick={() => decrementQty(product.id)}
               w="17.5%"
             >
@@ -163,7 +160,7 @@ const CartItemMobile = ({ product }: Props) => {
             <Input
               size="sm"
               {...input}
-              value={productQuantity}
+              value={product.quantity}
               readOnly
               pattern="^[-+]?[0-9]\d*(\.\d+)?$"
               w="65%"
@@ -176,7 +173,7 @@ const CartItemMobile = ({ product }: Props) => {
               colorScheme="appBlue"
               rounded="full"
               {...inc}
-              disabled={+productQuantity === 10}
+              disabled={+product.quantity === 10}
               onClick={() => incrementQty(product.id)}
               w="17.5%"
             >

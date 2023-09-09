@@ -16,6 +16,7 @@ type ContextType = {
   fetchProducts: () => Promise<void>;
   isLoading: boolean;
 };
+
 type Product = {
   id: string | number;
   title: string;
@@ -23,20 +24,19 @@ type Product = {
   price: string | number;
   image: string;
   category: string;
+  isSaved?: boolean;
 };
 
-// `quantity` can only exist if `inCart` is true
-export type ProductType =
-  | (Product & {
-      isSaved?: boolean;
-      inCart: true;
-      quantity: number | string;
-    })
-  | (Product & {
-      isSaved?: boolean;
-      inCart?: false | undefined;
-      quantity?: never;
-    });
+export type ProductInCart = Product & {
+  inCart: true;
+  quantity: number | string;
+};
+
+type ProductNotInCart = Product & {
+  inCart?: false;
+};
+
+export type ProductType = ProductInCart | ProductNotInCart;
 
 interface Props {
   children: ReactNode;
@@ -66,14 +66,12 @@ export const Provider: FC<Props> = ({ children }) => {
 
   useEffect(() => {
     // Get products in cart
-    const productsInCart = products.filter(product => product.inCart === true);
-    const productPrices = productsInCart.map(product => {
-      // This check is unnecessary since all products are in cart, but it's required for `quantity` to be accessible
-      if (product.inCart) {
-        return +product.price * +product.quantity;
-      }
-      return 0;
-    });
+    const productsInCart = products.filter(
+      (product): product is ProductInCart => product.inCart === true
+    );
+    const productPrices = productsInCart.map(
+      product => +product.price * +product.quantity
+    );
     setTotalPrice(productPrices.reduce((a, b) => a + b, 0));
     setCartItemCount(productsInCart.length);
     // Get saved products

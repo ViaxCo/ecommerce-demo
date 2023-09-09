@@ -13,21 +13,19 @@ import { ChangeEvent } from "react";
 import { BiTrash as TrashIcon } from "react-icons/bi";
 import { BsHeart as HeartIcon, BsHeartFill as HeartIconFill } from "react-icons/bs";
 import { Link as RouterLink } from "react-router-dom";
-import { ProductType } from "../../context/GlobalState";
+import { ProductInCart } from "../../context/GlobalState";
 import { useGlobalContext } from "../../context/useGlobalContext";
 import MUISkeleton from "../MUI/MUISkeleton";
 import MotionBox from "../MotionBox";
 
 type Props = {
-  product: ProductType;
+  product: ProductInCart;
 };
 
 const CartItem = ({ product }: Props) => {
   const toast = useToast();
   const { setQuantity, deleteFromCart, toggleSaved } = useGlobalContext();
-  // Checking if product is in cart is unnecessary but it's required for `quantity` to be accessible
-  const productQuantity = product.inCart ? product.quantity : 0;
-  const subTotal = +product.price * +productQuantity;
+  const subTotal = +product.price * +product.quantity;
 
   return (
     <MotionBox
@@ -134,7 +132,7 @@ const CartItem = ({ product }: Props) => {
             maxW={16}
             m="auto"
             rounded="md"
-            value={productQuantity}
+            value={product.quantity}
             onChange={(e: ChangeEvent<HTMLSelectElement>) =>
               setQuantity(e.target.value, product.id)
             }

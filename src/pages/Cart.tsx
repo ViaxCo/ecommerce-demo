@@ -4,11 +4,14 @@ import { Link as RouterLink } from "react-router-dom";
 import CartItem from "../components/CartItem/CartItem";
 import CartItemMobile from "../components/CartItem/CartItemMobile";
 import MotionBox from "../components/MotionBox";
+import { ProductInCart } from "../context/GlobalState";
 import { useGlobalContext } from "../context/useGlobalContext";
 
 const Cart = () => {
   const { products, totalPrice } = useGlobalContext();
-  const productsInCart = products.filter(product => product.inCart === true);
+  const productsInCart = products.filter(
+    (product): product is ProductInCart => product.inCart === true
+  );
   const [isLargerThan345] = useMediaQuery("(min-width: 345px)");
 
   return (
