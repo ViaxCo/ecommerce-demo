@@ -66,8 +66,8 @@ export const Provider: FC<Props> = ({ children }) => {
 
   useEffect(() => {
     // Get products in cart
-    const productsInCart = products.filter(
-      (product): product is ProductInCart => product.inCart === true
+    const productsInCart = products.flatMap(product =>
+      product.inCart === true ? product : []
     );
     const productPrices = productsInCart.map(
       product => +product.price * +product.quantity
